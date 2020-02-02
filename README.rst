@@ -45,11 +45,4 @@ Getting started
        print('document-topic statistics (not normalized)')
        dt
 
-    pip install bplda
-
-Documentation
-=============
-
-https://bplda.readthedocs.io/
-
 

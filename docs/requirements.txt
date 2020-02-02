@@ -1,0 +1,6 @@
+sphinx>=1.3
+sphinx-rtd-theme
+tqdm
+scipy
+scikit-learn
+numpy

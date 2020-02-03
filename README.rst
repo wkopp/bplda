@@ -14,11 +14,7 @@ The package is available under a GPL-v3 license.
 Installation
 ============
 
-::
-
-    pip install bplda
-
-You can also install the in-development version with
+You can also install the package with
 
 ::
 

@@ -86,13 +86,15 @@ def update_mu_async(double[:,:] mu,
       float: mean absolute change of the topic assignments mu.
     """
     
-    cdef int i, w_i, d_i, k
+    cdef int i, w_i, d_i, k, n_words
     cdef double[::view.contiguous] mu_mw = np.zeros([K], dtype=np.float)
     cdef double[::view.contiguous] mu_md = np.zeros([K], dtype=np.float)
     cdef double[::view.contiguous] mu_new = np.zeros([K], dtype=np.float)
     cdef double[::view.contiguous] Nw = np.zeros(K, dtype=np.float)
     cdef double musum = 0.0
     cdef double diff = 0.0
+
+    n_words = docneig_signal.shape[0]
     
     # init Nw
     for i in range(wordneig_signal.shape[0]):
@@ -114,7 +116,9 @@ def update_mu_async(double[:,:] mu,
 
         musum = 0.0
         for k in range(K):
-            mu_mw[k] = (docneig_signal[w_i, k] + alpha - x[i]*mu[i, k]) / (Nw[k] - wordneig_signal[d_i, k] + alpha)
+            mu_mw[k] = (docneig_signal[w_i, k] + alpha - \
+                        x[i]*mu[i, k]) / (Nw[k] - \
+                        wordneig_signal[d_i, k] + alpha * n_words)
             mu_new[k] = mu_mw[k] * mu_md[k]
             musum += mu_new[k]
         

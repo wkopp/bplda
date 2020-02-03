@@ -8,4 +8,4 @@ bplda
 .. automodule:: bplda
     :members:
 
-.. autofunction:: bplda.lda
+.. autoclass:: bplda.LDA

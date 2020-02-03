@@ -2225,6 +2225,7 @@ static const char __pyx_k_unpack[] = "unpack";
 static const char __pyx_k_update[] = "update";
 static const char __pyx_k_fortran[] = "fortran";
 static const char __pyx_k_memview[] = "memview";
+static const char __pyx_k_n_words[] = "n_words";
 static const char __pyx_k_Ellipsis[] = "Ellipsis";
 static const char __pyx_k_getstate[] = "__getstate__";
 static const char __pyx_k_itemsize[] = "itemsize";
@@ -2364,6 +2365,7 @@ static PyObject *__pyx_n_s_mu_md;
 static PyObject *__pyx_n_s_mu_mw;
 static PyObject *__pyx_n_s_mu_new;
 static PyObject *__pyx_n_s_musum;
+static PyObject *__pyx_n_s_n_words;
 static PyObject *__pyx_n_s_name;
 static PyObject *__pyx_n_s_name_2;
 static PyObject *__pyx_kp_u_ndarray_is_not_C_contiguous;
@@ -2983,6 +2985,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_2update_mu_async(CYTHON_UNUSED PyObject
   int __pyx_v_w_i;
   int __pyx_v_d_i;
   int __pyx_v_k;
+  int __pyx_v_n_words;
   __Pyx_memviewslice __pyx_v_mu_mw = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_mu_md = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_mu_new = { 0, 0, { 0 }, { 0 }, { 0 } };
@@ -3061,7 +3064,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_2update_mu_async(CYTHON_UNUSED PyObject
 
   /* "bplda/_bplda.pyx":90
  * 
- *     cdef int i, w_i, d_i, k
+ *     cdef int i, w_i, d_i, k, n_words
  *     cdef double[::view.contiguous] mu_mw = np.zeros([K], dtype=np.float)             # <<<<<<<<<<<<<<
  *     cdef double[::view.contiguous] mu_md = np.zeros([K], dtype=np.float)
  *     cdef double[::view.contiguous] mu_new = np.zeros([K], dtype=np.float)
@@ -3104,7 +3107,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_2update_mu_async(CYTHON_UNUSED PyObject
   __pyx_t_6.data = NULL;
 
   /* "bplda/_bplda.pyx":91
- *     cdef int i, w_i, d_i, k
+ *     cdef int i, w_i, d_i, k, n_words
  *     cdef double[::view.contiguous] mu_mw = np.zeros([K], dtype=np.float)
  *     cdef double[::view.contiguous] mu_md = np.zeros([K], dtype=np.float)             # <<<<<<<<<<<<<<
  *     cdef double[::view.contiguous] mu_new = np.zeros([K], dtype=np.float)
@@ -3244,11 +3247,20 @@ static PyObject *__pyx_pf_5bplda_6_bplda_2update_mu_async(CYTHON_UNUSED PyObject
  *     cdef double musum = 0.0
  *     cdef double diff = 0.0             # <<<<<<<<<<<<<<
  * 
- *     # init Nw
+ *     n_words = docneig_signal.shape[0]
  */
   __pyx_v_diff = 0.0;
 
-  /* "bplda/_bplda.pyx":98
+  /* "bplda/_bplda.pyx":97
+ *     cdef double diff = 0.0
+ * 
+ *     n_words = docneig_signal.shape[0]             # <<<<<<<<<<<<<<
+ * 
+ *     # init Nw
+ */
+  __pyx_v_n_words = (__pyx_v_docneig_signal.shape[0]);
+
+  /* "bplda/_bplda.pyx":100
  * 
  *     # init Nw
  *     for i in range(wordneig_signal.shape[0]):             # <<<<<<<<<<<<<<
@@ -3260,7 +3272,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_2update_mu_async(CYTHON_UNUSED PyObject
   for (__pyx_t_9 = 0; __pyx_t_9 < __pyx_t_8; __pyx_t_9+=1) {
     __pyx_v_i = __pyx_t_9;
 
-    /* "bplda/_bplda.pyx":99
+    /* "bplda/_bplda.pyx":101
  *     # init Nw
  *     for i in range(wordneig_signal.shape[0]):
  *         for k in range(K):             # <<<<<<<<<<<<<<
@@ -3272,7 +3284,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_2update_mu_async(CYTHON_UNUSED PyObject
     for (__pyx_t_12 = 0; __pyx_t_12 < __pyx_t_11; __pyx_t_12+=1) {
       __pyx_v_k = __pyx_t_12;
 
-      /* "bplda/_bplda.pyx":100
+      /* "bplda/_bplda.pyx":102
  *     for i in range(wordneig_signal.shape[0]):
  *         for k in range(K):
  *             Nw[k] += wordneig_signal[i, k]             # <<<<<<<<<<<<<<
@@ -3289,7 +3301,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_2update_mu_async(CYTHON_UNUSED PyObject
     }
   }
 
-  /* "bplda/_bplda.pyx":103
+  /* "bplda/_bplda.pyx":105
  * 
  *     # compute new mu
  *     for i in prange(N, nogil=True):             # <<<<<<<<<<<<<<
@@ -3347,7 +3359,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_2update_mu_async(CYTHON_UNUSED PyObject
                             __pyx_v_k = ((int)0xbad0bad0);
                             __pyx_v_w_i = ((int)0xbad0bad0);
 
-                            /* "bplda/_bplda.pyx":104
+                            /* "bplda/_bplda.pyx":106
  *     # compute new mu
  *     for i in prange(N, nogil=True):
  *         w_i = w[i]             # <<<<<<<<<<<<<<
@@ -3358,7 +3370,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_2update_mu_async(CYTHON_UNUSED PyObject
                             if (__pyx_t_16 < 0) __pyx_t_16 += __pyx_v_w.shape[0];
                             __pyx_v_w_i = (*((int *) ( /* dim=0 */ (__pyx_v_w.data + __pyx_t_16 * __pyx_v_w.strides[0]) )));
 
-                            /* "bplda/_bplda.pyx":105
+                            /* "bplda/_bplda.pyx":107
  *     for i in prange(N, nogil=True):
  *         w_i = w[i]
  *         d_i = d[i]             # <<<<<<<<<<<<<<
@@ -3369,7 +3381,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_2update_mu_async(CYTHON_UNUSED PyObject
                             if (__pyx_t_17 < 0) __pyx_t_17 += __pyx_v_d.shape[0];
                             __pyx_v_d_i = (*((int *) ( /* dim=0 */ (__pyx_v_d.data + __pyx_t_17 * __pyx_v_d.strides[0]) )));
 
-                            /* "bplda/_bplda.pyx":107
+                            /* "bplda/_bplda.pyx":109
  *         d_i = d[i]
  * 
  *         musum = 0.0             # <<<<<<<<<<<<<<
@@ -3378,7 +3390,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_2update_mu_async(CYTHON_UNUSED PyObject
  */
                             __pyx_v_musum = 0.0;
 
-                            /* "bplda/_bplda.pyx":108
+                            /* "bplda/_bplda.pyx":110
  * 
  *         musum = 0.0
  *         for k in range(K):             # <<<<<<<<<<<<<<
@@ -3390,7 +3402,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_2update_mu_async(CYTHON_UNUSED PyObject
                             for (__pyx_t_19 = 0; __pyx_t_19 < __pyx_t_18; __pyx_t_19+=1) {
                               __pyx_v_k = __pyx_t_19;
 
-                              /* "bplda/_bplda.pyx":109
+                              /* "bplda/_bplda.pyx":111
  *         musum = 0.0
  *         for k in range(K):
  *             mu_md[k] = wordneig_signal[d_i, k] + beta - x[i]*mu[i, k]             # <<<<<<<<<<<<<<
@@ -3411,7 +3423,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_2update_mu_async(CYTHON_UNUSED PyObject
                               if (__pyx_t_25 < 0) __pyx_t_25 += __pyx_v_mu_md.shape[0];
                               *((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_mu_md.data) + __pyx_t_25)) )) = (((*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_wordneig_signal.data + __pyx_t_20 * __pyx_v_wordneig_signal.strides[0]) ) + __pyx_t_21 * __pyx_v_wordneig_signal.strides[1]) ))) + __pyx_v_beta) - ((*((double *) ( /* dim=0 */ (__pyx_v_x.data + __pyx_t_22 * __pyx_v_x.strides[0]) ))) * (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_mu.data + __pyx_t_23 * __pyx_v_mu.strides[0]) ) + __pyx_t_24 * __pyx_v_mu.strides[1]) )))));
 
-                              /* "bplda/_bplda.pyx":110
+                              /* "bplda/_bplda.pyx":112
  *         for k in range(K):
  *             mu_md[k] = wordneig_signal[d_i, k] + beta - x[i]*mu[i, k]
  *             musum += mu_md[k]             # <<<<<<<<<<<<<<
@@ -3423,7 +3435,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_2update_mu_async(CYTHON_UNUSED PyObject
                               __pyx_v_musum = (__pyx_v_musum + (*((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_mu_md.data) + __pyx_t_26)) ))));
                             }
 
-                            /* "bplda/_bplda.pyx":112
+                            /* "bplda/_bplda.pyx":114
  *             musum += mu_md[k]
  * 
  *         for k in range(K):             # <<<<<<<<<<<<<<
@@ -3435,7 +3447,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_2update_mu_async(CYTHON_UNUSED PyObject
                             for (__pyx_t_19 = 0; __pyx_t_19 < __pyx_t_18; __pyx_t_19+=1) {
                               __pyx_v_k = __pyx_t_19;
 
-                              /* "bplda/_bplda.pyx":113
+                              /* "bplda/_bplda.pyx":115
  * 
  *         for k in range(K):
  *             mu_md[k] /= musum             # <<<<<<<<<<<<<<
@@ -3447,52 +3459,92 @@ static PyObject *__pyx_pf_5bplda_6_bplda_2update_mu_async(CYTHON_UNUSED PyObject
                               *((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_mu_md.data) + __pyx_t_27)) )) /= __pyx_v_musum;
                             }
 
-                            /* "bplda/_bplda.pyx":115
+                            /* "bplda/_bplda.pyx":117
  *             mu_md[k] /= musum
  * 
  *         musum = 0.0             # <<<<<<<<<<<<<<
  *         for k in range(K):
- *             mu_mw[k] = (docneig_signal[w_i, k] + alpha - x[i]*mu[i, k]) / (Nw[k] - wordneig_signal[d_i, k] + alpha)
+ *             mu_mw[k] = (docneig_signal[w_i, k] + alpha - \
  */
                             __pyx_v_musum = 0.0;
 
-                            /* "bplda/_bplda.pyx":116
+                            /* "bplda/_bplda.pyx":118
  * 
  *         musum = 0.0
  *         for k in range(K):             # <<<<<<<<<<<<<<
- *             mu_mw[k] = (docneig_signal[w_i, k] + alpha - x[i]*mu[i, k]) / (Nw[k] - wordneig_signal[d_i, k] + alpha)
- *             mu_new[k] = mu_mw[k] * mu_md[k]
+ *             mu_mw[k] = (docneig_signal[w_i, k] + alpha - \
+ *                         x[i]*mu[i, k]) / (Nw[k] - \
  */
                             __pyx_t_12 = __pyx_v_K;
                             __pyx_t_18 = __pyx_t_12;
                             for (__pyx_t_19 = 0; __pyx_t_19 < __pyx_t_18; __pyx_t_19+=1) {
                               __pyx_v_k = __pyx_t_19;
 
-                              /* "bplda/_bplda.pyx":117
+                              /* "bplda/_bplda.pyx":119
  *         musum = 0.0
  *         for k in range(K):
- *             mu_mw[k] = (docneig_signal[w_i, k] + alpha - x[i]*mu[i, k]) / (Nw[k] - wordneig_signal[d_i, k] + alpha)             # <<<<<<<<<<<<<<
- *             mu_new[k] = mu_mw[k] * mu_md[k]
- *             musum += mu_new[k]
+ *             mu_mw[k] = (docneig_signal[w_i, k] + alpha - \             # <<<<<<<<<<<<<<
+ *                         x[i]*mu[i, k]) / (Nw[k] - \
+ *                         wordneig_signal[d_i, k] + alpha * n_words)
  */
                               __pyx_t_28 = __pyx_v_w_i;
                               __pyx_t_29 = __pyx_v_k;
                               if (__pyx_t_28 < 0) __pyx_t_28 += __pyx_v_docneig_signal.shape[0];
                               if (__pyx_t_29 < 0) __pyx_t_29 += __pyx_v_docneig_signal.shape[1];
+
+                              /* "bplda/_bplda.pyx":120
+ *         for k in range(K):
+ *             mu_mw[k] = (docneig_signal[w_i, k] + alpha - \
+ *                         x[i]*mu[i, k]) / (Nw[k] - \             # <<<<<<<<<<<<<<
+ *                         wordneig_signal[d_i, k] + alpha * n_words)
+ *             mu_new[k] = mu_mw[k] * mu_md[k]
+ */
                               __pyx_t_30 = __pyx_v_i;
                               if (__pyx_t_30 < 0) __pyx_t_30 += __pyx_v_x.shape[0];
                               __pyx_t_31 = __pyx_v_i;
                               __pyx_t_32 = __pyx_v_k;
                               if (__pyx_t_31 < 0) __pyx_t_31 += __pyx_v_mu.shape[0];
                               if (__pyx_t_32 < 0) __pyx_t_32 += __pyx_v_mu.shape[1];
+
+                              /* "bplda/_bplda.pyx":119
+ *         musum = 0.0
+ *         for k in range(K):
+ *             mu_mw[k] = (docneig_signal[w_i, k] + alpha - \             # <<<<<<<<<<<<<<
+ *                         x[i]*mu[i, k]) / (Nw[k] - \
+ *                         wordneig_signal[d_i, k] + alpha * n_words)
+ */
                               __pyx_t_33 = (((*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_docneig_signal.data + __pyx_t_28 * __pyx_v_docneig_signal.strides[0]) ) + __pyx_t_29 * __pyx_v_docneig_signal.strides[1]) ))) + __pyx_v_alpha) - ((*((double *) ( /* dim=0 */ (__pyx_v_x.data + __pyx_t_30 * __pyx_v_x.strides[0]) ))) * (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_mu.data + __pyx_t_31 * __pyx_v_mu.strides[0]) ) + __pyx_t_32 * __pyx_v_mu.strides[1]) )))));
+
+                              /* "bplda/_bplda.pyx":120
+ *         for k in range(K):
+ *             mu_mw[k] = (docneig_signal[w_i, k] + alpha - \
+ *                         x[i]*mu[i, k]) / (Nw[k] - \             # <<<<<<<<<<<<<<
+ *                         wordneig_signal[d_i, k] + alpha * n_words)
+ *             mu_new[k] = mu_mw[k] * mu_md[k]
+ */
                               __pyx_t_34 = __pyx_v_k;
                               if (__pyx_t_34 < 0) __pyx_t_34 += __pyx_v_Nw.shape[0];
+
+                              /* "bplda/_bplda.pyx":121
+ *             mu_mw[k] = (docneig_signal[w_i, k] + alpha - \
+ *                         x[i]*mu[i, k]) / (Nw[k] - \
+ *                         wordneig_signal[d_i, k] + alpha * n_words)             # <<<<<<<<<<<<<<
+ *             mu_new[k] = mu_mw[k] * mu_md[k]
+ *             musum += mu_new[k]
+ */
                               __pyx_t_35 = __pyx_v_d_i;
                               __pyx_t_36 = __pyx_v_k;
                               if (__pyx_t_35 < 0) __pyx_t_35 += __pyx_v_wordneig_signal.shape[0];
                               if (__pyx_t_36 < 0) __pyx_t_36 += __pyx_v_wordneig_signal.shape[1];
-                              __pyx_t_37 = (((*((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_Nw.data) + __pyx_t_34)) ))) - (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_wordneig_signal.data + __pyx_t_35 * __pyx_v_wordneig_signal.strides[0]) ) + __pyx_t_36 * __pyx_v_wordneig_signal.strides[1]) )))) + __pyx_v_alpha);
+
+                              /* "bplda/_bplda.pyx":120
+ *         for k in range(K):
+ *             mu_mw[k] = (docneig_signal[w_i, k] + alpha - \
+ *                         x[i]*mu[i, k]) / (Nw[k] - \             # <<<<<<<<<<<<<<
+ *                         wordneig_signal[d_i, k] + alpha * n_words)
+ *             mu_new[k] = mu_mw[k] * mu_md[k]
+ */
+                              __pyx_t_37 = (((*((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_Nw.data) + __pyx_t_34)) ))) - (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_wordneig_signal.data + __pyx_t_35 * __pyx_v_wordneig_signal.strides[0]) ) + __pyx_t_36 * __pyx_v_wordneig_signal.strides[1]) )))) + (__pyx_v_alpha * __pyx_v_n_words));
                               if (unlikely(__pyx_t_37 == 0)) {
                                 #ifdef WITH_THREAD
                                 PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
@@ -3501,15 +3553,23 @@ static PyObject *__pyx_pf_5bplda_6_bplda_2update_mu_async(CYTHON_UNUSED PyObject
                                 #ifdef WITH_THREAD
                                 __Pyx_PyGILState_Release(__pyx_gilstate_save);
                                 #endif
-                                __PYX_ERR(0, 117, __pyx_L12_error)
+                                __PYX_ERR(0, 120, __pyx_L12_error)
                               }
+
+                              /* "bplda/_bplda.pyx":119
+ *         musum = 0.0
+ *         for k in range(K):
+ *             mu_mw[k] = (docneig_signal[w_i, k] + alpha - \             # <<<<<<<<<<<<<<
+ *                         x[i]*mu[i, k]) / (Nw[k] - \
+ *                         wordneig_signal[d_i, k] + alpha * n_words)
+ */
                               __pyx_t_38 = __pyx_v_k;
                               if (__pyx_t_38 < 0) __pyx_t_38 += __pyx_v_mu_mw.shape[0];
                               *((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_mu_mw.data) + __pyx_t_38)) )) = (__pyx_t_33 / __pyx_t_37);
 
-                              /* "bplda/_bplda.pyx":118
- *         for k in range(K):
- *             mu_mw[k] = (docneig_signal[w_i, k] + alpha - x[i]*mu[i, k]) / (Nw[k] - wordneig_signal[d_i, k] + alpha)
+                              /* "bplda/_bplda.pyx":122
+ *                         x[i]*mu[i, k]) / (Nw[k] - \
+ *                         wordneig_signal[d_i, k] + alpha * n_words)
  *             mu_new[k] = mu_mw[k] * mu_md[k]             # <<<<<<<<<<<<<<
  *             musum += mu_new[k]
  * 
@@ -3522,8 +3582,8 @@ static PyObject *__pyx_pf_5bplda_6_bplda_2update_mu_async(CYTHON_UNUSED PyObject
                               if (__pyx_t_41 < 0) __pyx_t_41 += __pyx_v_mu_new.shape[0];
                               *((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_mu_new.data) + __pyx_t_41)) )) = ((*((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_mu_mw.data) + __pyx_t_39)) ))) * (*((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_mu_md.data) + __pyx_t_40)) ))));
 
-                              /* "bplda/_bplda.pyx":119
- *             mu_mw[k] = (docneig_signal[w_i, k] + alpha - x[i]*mu[i, k]) / (Nw[k] - wordneig_signal[d_i, k] + alpha)
+                              /* "bplda/_bplda.pyx":123
+ *                         wordneig_signal[d_i, k] + alpha * n_words)
  *             mu_new[k] = mu_mw[k] * mu_md[k]
  *             musum += mu_new[k]             # <<<<<<<<<<<<<<
  * 
@@ -3534,7 +3594,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_2update_mu_async(CYTHON_UNUSED PyObject
                               __pyx_v_musum = (__pyx_v_musum + (*((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_mu_new.data) + __pyx_t_42)) ))));
                             }
 
-                            /* "bplda/_bplda.pyx":121
+                            /* "bplda/_bplda.pyx":125
  *             musum += mu_new[k]
  * 
  *         for k in range(K):             # <<<<<<<<<<<<<<
@@ -3546,7 +3606,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_2update_mu_async(CYTHON_UNUSED PyObject
                             for (__pyx_t_19 = 0; __pyx_t_19 < __pyx_t_18; __pyx_t_19+=1) {
                               __pyx_v_k = __pyx_t_19;
 
-                              /* "bplda/_bplda.pyx":122
+                              /* "bplda/_bplda.pyx":126
  * 
  *         for k in range(K):
  *             mu_new[k] /= musum             # <<<<<<<<<<<<<<
@@ -3557,7 +3617,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_2update_mu_async(CYTHON_UNUSED PyObject
                               if (__pyx_t_43 < 0) __pyx_t_43 += __pyx_v_mu_new.shape[0];
                               *((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_mu_new.data) + __pyx_t_43)) )) /= __pyx_v_musum;
 
-                              /* "bplda/_bplda.pyx":124
+                              /* "bplda/_bplda.pyx":128
  *             mu_new[k] /= musum
  * 
  *             diff += fabs(mu_new[k]- mu[i, k])             # <<<<<<<<<<<<<<
@@ -3572,7 +3632,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_2update_mu_async(CYTHON_UNUSED PyObject
                               if (__pyx_t_46 < 0) __pyx_t_46 += __pyx_v_mu.shape[1];
                               __pyx_v_diff = (__pyx_v_diff + fabs(((*((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_mu_new.data) + __pyx_t_44)) ))) - (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_mu.data + __pyx_t_45 * __pyx_v_mu.strides[0]) ) + __pyx_t_46 * __pyx_v_mu.strides[1]) ))))));
 
-                              /* "bplda/_bplda.pyx":127
+                              /* "bplda/_bplda.pyx":131
  *             # update the summary statistics with the new mu assignment
  *             # and update mu.
  *             docneig_signal[w_i, k] += x[i]*(mu_new[k] - mu[i, k])             # <<<<<<<<<<<<<<
@@ -3593,7 +3653,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_2update_mu_async(CYTHON_UNUSED PyObject
                               if (__pyx_t_52 < 0) __pyx_t_52 += __pyx_v_docneig_signal.shape[1];
                               *((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_docneig_signal.data + __pyx_t_51 * __pyx_v_docneig_signal.strides[0]) ) + __pyx_t_52 * __pyx_v_docneig_signal.strides[1]) )) += ((*((double *) ( /* dim=0 */ (__pyx_v_x.data + __pyx_t_47 * __pyx_v_x.strides[0]) ))) * ((*((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_mu_new.data) + __pyx_t_48)) ))) - (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_mu.data + __pyx_t_49 * __pyx_v_mu.strides[0]) ) + __pyx_t_50 * __pyx_v_mu.strides[1]) )))));
 
-                              /* "bplda/_bplda.pyx":128
+                              /* "bplda/_bplda.pyx":132
  *             # and update mu.
  *             docneig_signal[w_i, k] += x[i]*(mu_new[k] - mu[i, k])
  *             wordneig_signal[d_i, k] += x[i]*(mu_new[k] - mu[i, k])             # <<<<<<<<<<<<<<
@@ -3614,7 +3674,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_2update_mu_async(CYTHON_UNUSED PyObject
                               if (__pyx_t_58 < 0) __pyx_t_58 += __pyx_v_wordneig_signal.shape[1];
                               *((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_wordneig_signal.data + __pyx_t_57 * __pyx_v_wordneig_signal.strides[0]) ) + __pyx_t_58 * __pyx_v_wordneig_signal.strides[1]) )) += ((*((double *) ( /* dim=0 */ (__pyx_v_x.data + __pyx_t_53 * __pyx_v_x.strides[0]) ))) * ((*((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_mu_new.data) + __pyx_t_54)) ))) - (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_mu.data + __pyx_t_55 * __pyx_v_mu.strides[0]) ) + __pyx_t_56 * __pyx_v_mu.strides[1]) )))));
 
-                              /* "bplda/_bplda.pyx":129
+                              /* "bplda/_bplda.pyx":133
  *             docneig_signal[w_i, k] += x[i]*(mu_new[k] - mu[i, k])
  *             wordneig_signal[d_i, k] += x[i]*(mu_new[k] - mu[i, k])
  *             Nw[k] += x[i]*(mu_new[k] - mu[i, k])             # <<<<<<<<<<<<<<
@@ -3633,7 +3693,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_2update_mu_async(CYTHON_UNUSED PyObject
                               if (__pyx_t_63 < 0) __pyx_t_63 += __pyx_v_Nw.shape[0];
                               *((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_Nw.data) + __pyx_t_63)) )) += ((*((double *) ( /* dim=0 */ (__pyx_v_x.data + __pyx_t_59 * __pyx_v_x.strides[0]) ))) * ((*((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_mu_new.data) + __pyx_t_60)) ))) - (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_mu.data + __pyx_t_61 * __pyx_v_mu.strides[0]) ) + __pyx_t_62 * __pyx_v_mu.strides[1]) )))));
 
-                              /* "bplda/_bplda.pyx":131
+                              /* "bplda/_bplda.pyx":135
  *             Nw[k] += x[i]*(mu_new[k] - mu[i, k])
  * 
  *             mu[i, k] = mu_new[k]             # <<<<<<<<<<<<<<
@@ -3739,7 +3799,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_2update_mu_async(CYTHON_UNUSED PyObject
         #endif
       }
 
-      /* "bplda/_bplda.pyx":103
+      /* "bplda/_bplda.pyx":105
  * 
  *     # compute new mu
  *     for i in prange(N, nogil=True):             # <<<<<<<<<<<<<<
@@ -3765,7 +3825,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_2update_mu_async(CYTHON_UNUSED PyObject
       }
   }
 
-  /* "bplda/_bplda.pyx":133
+  /* "bplda/_bplda.pyx":137
  *             mu[i, k] = mu_new[k]
  * 
  *     return diff / N             # <<<<<<<<<<<<<<
@@ -3773,9 +3833,9 @@ static PyObject *__pyx_pf_5bplda_6_bplda_2update_mu_async(CYTHON_UNUSED PyObject
   __Pyx_XDECREF(__pyx_r);
   if (unlikely(__pyx_v_N == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 133, __pyx_L1_error)
+    __PYX_ERR(0, 137, __pyx_L1_error)
   }
-  __pyx_t_3 = PyFloat_FromDouble((__pyx_v_diff / __pyx_v_N)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 133, __pyx_L1_error)
+  __pyx_t_3 = PyFloat_FromDouble((__pyx_v_diff / __pyx_v_N)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 137, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_r = __pyx_t_3;
   __pyx_t_3 = 0;
@@ -19797,6 +19857,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_mu_mw, __pyx_k_mu_mw, sizeof(__pyx_k_mu_mw), 0, 0, 1, 1},
   {&__pyx_n_s_mu_new, __pyx_k_mu_new, sizeof(__pyx_k_mu_new), 0, 0, 1, 1},
   {&__pyx_n_s_musum, __pyx_k_musum, sizeof(__pyx_k_musum), 0, 0, 1, 1},
+  {&__pyx_n_s_n_words, __pyx_k_n_words, sizeof(__pyx_k_n_words), 0, 0, 1, 1},
   {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
   {&__pyx_n_s_name_2, __pyx_k_name_2, sizeof(__pyx_k_name_2), 0, 0, 1, 1},
   {&__pyx_kp_u_ndarray_is_not_C_contiguous, __pyx_k_ndarray_is_not_C_contiguous, sizeof(__pyx_k_ndarray_is_not_C_contiguous), 0, 1, 0, 0},
@@ -20160,10 +20221,10 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *               double[:,:] docneig_signal,
  *               double[:,:] wordneig_signal,
  */
-  __pyx_tuple__28 = PyTuple_Pack(20, __pyx_n_s_mu, __pyx_n_s_docneig_signal, __pyx_n_s_wordneig_signal, __pyx_n_s_w, __pyx_n_s_d, __pyx_n_s_x, __pyx_n_s_alpha, __pyx_n_s_beta, __pyx_n_s_K, __pyx_n_s_N, __pyx_n_s_i, __pyx_n_s_w_i, __pyx_n_s_d_i, __pyx_n_s_k, __pyx_n_s_mu_mw, __pyx_n_s_mu_md, __pyx_n_s_mu_new, __pyx_n_s_Nw, __pyx_n_s_musum, __pyx_n_s_diff); if (unlikely(!__pyx_tuple__28)) __PYX_ERR(0, 51, __pyx_L1_error)
+  __pyx_tuple__28 = PyTuple_Pack(21, __pyx_n_s_mu, __pyx_n_s_docneig_signal, __pyx_n_s_wordneig_signal, __pyx_n_s_w, __pyx_n_s_d, __pyx_n_s_x, __pyx_n_s_alpha, __pyx_n_s_beta, __pyx_n_s_K, __pyx_n_s_N, __pyx_n_s_i, __pyx_n_s_w_i, __pyx_n_s_d_i, __pyx_n_s_k, __pyx_n_s_n_words, __pyx_n_s_mu_mw, __pyx_n_s_mu_md, __pyx_n_s_mu_new, __pyx_n_s_Nw, __pyx_n_s_musum, __pyx_n_s_diff); if (unlikely(!__pyx_tuple__28)) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__28);
   __Pyx_GIVEREF(__pyx_tuple__28);
-  __pyx_codeobj__29 = (PyObject*)__Pyx_PyCode_New(10, 0, 20, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__28, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_bplda__bplda_pyx, __pyx_n_s_update_mu_async, 51, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__29)) __PYX_ERR(0, 51, __pyx_L1_error)
+  __pyx_codeobj__29 = (PyObject*)__Pyx_PyCode_New(10, 0, 21, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__28, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_bplda__bplda_pyx, __pyx_n_s_update_mu_async, 51, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__29)) __PYX_ERR(0, 51, __pyx_L1_error)
 
   /* "View.MemoryView":286
  *         return self.name

@@ -29,20 +29,20 @@ Getting started
 .. code-block:: python
 
        import numpy as np
-       from bplda import lda
+       from bplda import LDA
 
        # toy data (10 documents, vocabulary size=5)
        minitest = np.zeros((5, 10))
        minitest[:3,:5]=1
        minitest[-3:,-5:]=1
 
-       # fit the model using 3 topics
-       wt, dt = lda(minitest, 3, niter=10, seed=10)
+       model = LDA(3, niter=10, seed=10)
 
-       print('word-topic statistics (not normalized)')
-       wt
+       # fit and get document-topic matrix
+       doc_top = model.fit_transform(minitest)
 
-       print('document-topic statistics (not normalized)')
-       dt
+       # access word-topic matrix
+       model.word_topic_
+
 
 

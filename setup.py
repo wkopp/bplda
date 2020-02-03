@@ -16,6 +16,9 @@ from os.path import splitext
 from setuptools import Extension
 from setuptools import find_packages
 from setuptools import setup
+import pkg_resources
+import textwrap
+import sys
 
 try:
     # Allow installing package without any Cython available. This
@@ -38,6 +41,24 @@ def read(*names, **kwargs):
 # deps have been safely installed).
 if 'TOXENV' in os.environ and 'SETUPPY_CFLAGS' in os.environ:
     os.environ['CFLAGS'] = os.environ['SETUPPY_CFLAGS']
+
+def is_installed(requirement):
+    try:
+        pkg_resources.require(requirement)
+    except pkg_resources.ResolutionError:
+        return False
+    else:
+        return True
+
+if not is_installed('numpy'):
+    print(textwrap.dedent("""
+            Error: numpy needs to be installed first. You can install it via:
+
+            $ pip install numpy
+            """), file=sys.stderr)
+    exit(1)
+
+import numpy
 
 setup(
     name='bplda',
@@ -100,7 +121,7 @@ setup(
         Extension(
             splitext(relpath(path, 'src').replace(os.sep, '.'))[0],
             sources=[path],
-            include_dirs=[dirname(path)]
+            include_dirs=[dirname(path), numpy.get_include()]
         )
         for root, _, _ in os.walk('src')
         for path in glob(join(root, '*.pyx' if Cython else '*.c'))

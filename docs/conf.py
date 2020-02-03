@@ -20,7 +20,7 @@ project = 'bplda'
 year = '2020'
 author = 'Wolfgang Kopp'
 copyright = '{0}, {1}'.format(year, author)
-version = release = '0.0.0'
+version = release = '0.0.1'
 
 pygments_style = 'trac'
 templates_path = ['.']

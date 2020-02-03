@@ -41,8 +41,8 @@ if 'TOXENV' in os.environ and 'SETUPPY_CFLAGS' in os.environ:
 
 setup(
     name='bplda',
-    version='0.0.0',
-    license='MIT',
+    version='0.0.1',
+    license='GPL-v3',
     description='Latent Dirichlet Allocation fitted via loopy belief propagation',
     long_description='%s\n%s' % (
         re.compile('^.. start-badges.*^.. end-badges', re.M | re.S).sub('', read('README.rst')),
@@ -60,7 +60,7 @@ setup(
         # complete classifier list: http://pypi.python.org/pypi?%3Aaction=list_classifiers
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: MIT License',
+        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Operating System :: Unix',
         'Operating System :: POSIX',
         'Operating System :: Microsoft :: Windows',
@@ -68,12 +68,13 @@ setup(
         'Programming Language :: Python :: 3',
         'Topic :: Utilities',
     ],
-    project_urls={
-        'Documentation': 'https://bplda.readthedocs.io/',
-        'Changelog': 'https://bplda.readthedocs.io/en/latest/changelog.html',
-        'Issue Tracker': 'https://github.com/wkopp/bplda/issues',
-    },
+    #    project_urls={
+    #        'Documentation': 'https://bplda.readthedocs.io/',
+    #        'Changelog': 'https://bplda.readthedocs.io/en/latest/changelog.html',
+    #        'Issue Tracker': 'https://github.com/wkopp/bplda/issues',
+    #    },
     keywords=[
+        'Latent Dirichlet Allocation', 'Belief propagation'
         # eg: 'keyword1', 'keyword2', 'keyword3',
     ],
     python_requires='>=3.6',

@@ -43,11 +43,12 @@ setup(
     name='bplda',
     version='0.0.1',
     license='GPL-v3',
-    description='Latent Dirichlet Allocation fitted via loopy belief propagation',
+    description='Latent Dirichlet Allocation with loopy belief propagation',
     long_description='%s\n%s' % (
         re.compile('^.. start-badges.*^.. end-badges', re.M | re.S).sub('', read('README.rst')),
         re.sub(':[a-z]+:`~?(.*?)`', r'``\1``', read('CHANGELOG.rst'))
     ),
+    long_description_content_type='text/x-rst',
     author='Wolfgang Kopp',
     author_email='wolfgang.kopp@mdc-berlin.de',
     url='https://github.com/wkopp/bplda',
@@ -74,7 +75,7 @@ setup(
     #        'Issue Tracker': 'https://github.com/wkopp/bplda/issues',
     #    },
     keywords=[
-        'Latent Dirichlet Allocation', 'Belief propagation'
+        'Latent Dirichlet Allocation', 'Belief propagation',
         # eg: 'keyword1', 'keyword2', 'keyword3',
     ],
     python_requires='>=3.6',

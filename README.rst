@@ -2,7 +2,7 @@
 Overview
 ========
 
-
+.. start-badges
 
 .. end-badges
 
@@ -18,7 +18,9 @@ Installation
 
     pip install bplda
 
-You can also install the in-development version with::
+You can also install the in-development version with
+
+::
 
     pip install https://github.com/wkopp/bplda/archive/master.zip
 
@@ -28,21 +30,18 @@ Getting started
 
 .. code-block:: python
 
-       import numpy as np
-       from bplda import LDA
+   import numpy as np
+   from bplda import LDA
 
-       # toy data (10 documents, vocabulary size=5)
-       minitest = np.zeros((5, 10))
-       minitest[:3,:5]=1
-       minitest[-3:,-5:]=1
+   # toy data (10 documents, vocabulary size=5)
+   minitest = np.zeros((5, 10))
+   minitest[:3,:5]=1
+   minitest[-3:,-5:]=1
 
-       model = LDA(3, niter=10, seed=10)
+   model = LDA(3, niter=10, seed=10)
 
-       # fit and get document-topic matrix
-       doc_top = model.fit_transform(minitest)
+   # fit and get document-topic matrix
+   doc_top = model.fit_transform(minitest)
 
-       # access word-topic matrix
-       model.word_topic_
-
-
-
+   # access word-topic matrix
+   model.word_topic_

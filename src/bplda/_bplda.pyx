@@ -2,10 +2,12 @@
 from cython.parallel import prange
 import numpy as np
 cimport numpy as np
-from cython cimport view, boundscheck
-from libc.math cimport fabs
+from cython cimport view, boundscheck, wraparound
+from libc.math cimport fabs, log, exp, INFINITY
+#from numpy.math cimport logl, expl, INFINITY
 
 @boundscheck(False)
+@wraparound(False)
 def update_neighs(double[:,:] mu,
               double[:,:] docneig_signal,
               double[:,:] wordneig_signal,
@@ -47,7 +49,9 @@ def update_neighs(double[:,:] mu,
             docneig_signal[w[i], k] += v
             wordneig_signal[d[i], k] += v
 
+
 @boundscheck(False)
+@wraparound(False)
 def update_mu_async(double[:,:] mu,
               double[:,:] docneig_signal,
               double[:,:] wordneig_signal,
@@ -135,3 +139,56 @@ def update_mu_async(double[:,:] mu,
             mu[i, k] = mu_new[k]
             
     return diff / N
+
+
+@boundscheck(False)
+@wraparound(False)
+def _loglikelihood(int[:] w, int[:] d, 
+              double[:] x,
+              double[:,:] doc_topic,
+              double[:,:] word_topic):
+    """
+    Computes the log-likelihood for the current model
+    
+    Parameters:
+    doc_topic : np.array[V, K]
+        Document-topic probabilities
+    wordneig_signal : np.array[D, K]
+        Word-topic probabilities
+    w : np.array[N]
+        Word indices
+    d :  np.array[N]
+        Document indices
+    x : np.array[N]
+        Word count
+
+    Returns :
+      float: log-likelihood
+    """
+    
+    cdef int i, w_i, d_i, k, N, n_topics = doc_topic.shape[1]
+    cdef double[::view.contiguous] buff = np.zeros(n_topics, dtype=np.float)
+    cdef double loglikeli = 0.0
+    cdef double maxlog = 0.0
+    cdef double likeli = 0.0
+
+    N = w.shape[0]
+    
+    # compute new mu
+    for i in prange(N, nogil=True):
+        w_i = w[i]
+        d_i = d[i]
+
+        maxlog = -INFINITY
+        for k in range(n_topics):
+            buff[k] = log(doc_topic[d_i, k]) + log(word_topic[w_i, k])
+            if maxlog < buff[k]:
+                maxlog = buff[k]
+
+        likeli = 0.0
+        for k in range(n_topics):
+            likeli += exp(buff[k] - maxlog)
+
+        loglikeli += log(likeli) + maxlog
+
+    return loglikeli

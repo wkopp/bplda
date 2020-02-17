@@ -94,3 +94,18 @@ def test_lda3():
     )
 
     np.testing.assert_allclose(dt, compdt, atol=1e-6, rtol=1e-6)
+
+
+def test_score():
+
+    # toy data (10 documents, vocabulary size=5)
+    minitest = np.zeros((5, 10))
+    minitest[:3, :5] = 1
+    minitest[-3:, -5:] = 1
+
+    lda = LDA(3, niter=10, seed=10)
+    lda.fit(minitest)
+    wt = lda.word_topic_
+    dt = lda.doc_topic_
+
+    print(lda.score(minitest))

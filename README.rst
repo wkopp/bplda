@@ -41,3 +41,8 @@ Getting started
 
    # access word-topic matrix
    model.word_topic_
+
+   # compute the log-likelihood score
+   model.score(minitest)
+
+   model.loglikeli_

@@ -3,10 +3,6 @@ Overview
 ========
 
 .. start-badges
-
-.. |Github Actions| image:: https://github.com/wkopp/bplda/.github/workflows/python-package.yml/badge.svg
-   :target:
-
 .. end-badges
 
 This package implements Latent Dirichlet Allocation fitted via loopy belief propagation

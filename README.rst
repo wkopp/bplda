@@ -14,7 +14,7 @@ The package is available under a GPL-v3 license.
 Installation
 ============
 
-You can also install the package with
+You can install the package using
 
 ::
 

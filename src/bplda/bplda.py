@@ -341,12 +341,31 @@ class CollapsedGibbsLDA(BaseEstimator, TransformerMixin):
         self.observed_words = X.row
         self.observed_documents = X.col
         # init params
-        z = check_random_state(self.seed_).randint(0, self.num_topics, size=X.nnz)
-        self.topic_assignments = z.astype('int32')
+        z = check_random_state(self.seed_).randint(0, self.num_topics, size=X.nnz).astype('int32')
+        self.topic_assignments = z
         self.word_topic_matrix = np.asarray(coo_matrix((self.word_multiples, (self.observed_words, self.topic_assignments)), shape=(self.num_words, self.num_topics)).todense())
         self.topic_document_matrix = np.asarray(coo_matrix((self.word_multiples, (self.topic_assignments, self.observed_documents)), shape=(self.num_topics, self.num_documents)).todense())
         self.document_counts = np.asarray(self.topic_document_matrix.sum(0)).flatten()
         self.topic_counts = np.asarray(self.topic_document_matrix.sum(1)).flatten()
+
+    def prepare_data(self, X):
+        X = self._check_input(X)
+        num_words, num_documents = X.shape
+        word_multiples = X.data
+        observed_words = X.row
+        observed_documents = X.col
+        # init params
+        z = check_random_state(self.seed_).randint(0, self.num_topics, size=X.nnz).astype('int32')
+
+        word_topic_matrix = np.asarray(coo_matrix((word_multiples, (observed_words, z)), shape=(num_words, self.num_topics)).todense())
+        topic_document_matrix = np.asarray(coo_matrix((word_multiples, (z, observed_documents)), shape=(self.num_topics, num_documents)).todense())
+        document_counts = np.asarray(topic_document_matrix.sum(0)).flatten()
+        topic_counts = np.asarray(topic_document_matrix.sum(1)).flatten()
+
+        return num_words, num_documents, observed_words, \
+               observed_documents, word_multiples, z, \
+               word_topic_matrix, topic_document_matrix, document_counts, \
+               topic_counts
 
     def debug(self):
         if not self.debug_:
@@ -393,6 +412,7 @@ class CollapsedGibbsLDA(BaseEstimator, TransformerMixin):
                 self.beta_,
                 self.document_counts,
                 self.topic_counts,
+                0
             )
             if (epoch % self.evaluate_every) == 0:
                  self.history.append(self.score(X))
@@ -414,6 +434,7 @@ class CollapsedGibbsLDA(BaseEstimator, TransformerMixin):
                 self.beta_,
                 self.document_counts,
                 self.topic_counts,
+                0
             )
 
             if (epoch % self.evaluate_every) == 0:
@@ -454,6 +475,14 @@ class CollapsedGibbsLDA(BaseEstimator, TransformerMixin):
         -------
         loglikelihood : float
         """
+        if X is None:
+            nw = self.num_words
+            nd = self.num_documents
+            wtm = self.word_topic_matrix
+            tdm = self.topic_document_matrix
+        else:
+            tdm = self._transform(X)
+
         loglikeli = self.num_topics*loggamma(self.beta_*self.num_words)
         loglikeli -= self.num_topics*self.num_words*loggamma(self.beta_)
         loglikeli += self.num_documents * loggamma(self.alpha_*self.num_topics)
@@ -461,13 +490,38 @@ class CollapsedGibbsLDA(BaseEstimator, TransformerMixin):
 
         loglikeli += loggamma(self.word_topic_matrix + self.beta_).sum()
         loglikeli -= loggamma(self.word_topic_matrix.sum(0) + self.beta_*self.num_words).sum()
-        loglikeli += loggamma(self.topic_document_matrix + self.alpha_).sum()
-        loglikeli -= loggamma(self.topic_document_matrix.sum(0) + self.alpha_*self.num_topics).sum()
+        loglikeli += loggamma(tdm + self.alpha_).sum()
+        loglikeli -= loggamma(tdm.sum(0) + self.alpha_*self.num_topics).sum()
         return loglikeli
-        #l1 = loggamma(self.word_topic_matrix + self.beta_) - loggamma(self.word_topic_matrix.sum(0, keepdims=True) + self.beta_*self.num_words)
-        #l2 = loggamma(self.topic_document_matrix + self.alpha_) - loggamma(self.topic_document_matrix.sum(0, keepdims=True) + self.alpha_*self.num_topics)
-        #return _marginal_loglikelihood(loglikeli, l1, l2, self.num_words, self.num_documents, self.num_topics)
 
-    def finetune(self, X):
-        """ update topic-document matrix while keeping the word-topic matrix fixed."""
-        pass
+    def transform(self, X=None):
+        if X is None:
+            return self.topic_document_matrix
+        return self._transform(X)
+
+    def _transform(self, X):
+        nw, nd, ow, od, wm, z,  wtm, tdm, dc, tc = self.prepare_data(X)
+        assert self.num_words == nw
+
+        rand_state = check_random_state(self.seed_)
+        for epoch in range(3):
+            self.debug()
+            ret = collapsed_gibbs_sampling(
+                ow,
+                od,
+                wm,
+                z,
+                self.word_topic_matrix,
+                tdm,
+                rand_state.rand(len(ow)),
+                len(ow),
+                int(self.num_topics),
+                int(self.num_words),
+                self.alpha_,
+                self.beta_,
+                dc,
+                tc,
+                1
+            )
+        return tdm
+

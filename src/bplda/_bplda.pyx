@@ -155,7 +155,8 @@ def collapsed_gibbs_sampling(int[:] word,
                              double alpha,
                              double beta,
                              double [:] doc_counts,
-                             double [:] topic_counts):
+                             double [:] topic_counts,
+                             int fixed_words):
 
     """
     Updates the topic assignments for all words using belief propagation.
@@ -203,7 +204,8 @@ def collapsed_gibbs_sampling(int[:] word,
 
             doc_counts[d_i] -= m_i
             topic_counts[z_i] -= m_i
-            word_topic_matrix[w_i, z_i] -= m_i
+            if fixed_words == 0:
+                word_topic_matrix[w_i, z_i] -= m_i
             topic_document_matrix[z_i, d_i] -= m_i
 
             prob_norm = 0.0
@@ -221,7 +223,8 @@ def collapsed_gibbs_sampling(int[:] word,
             z_assign[i] = z_i
             doc_counts[d_i] += m_i
             topic_counts[z_i] += m_i
-            word_topic_matrix[w_i, z_i] += m_i
+            if fixed_words == 0:
+                word_topic_matrix[w_i, z_i] += m_i
             topic_document_matrix[z_i, d_i] += m_i
 
     return 0

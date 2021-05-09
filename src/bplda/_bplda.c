@@ -2284,6 +2284,7 @@ static const char __pyx_k_pyx_vtable[] = "__pyx_vtable__";
 static const char __pyx_k_ImportError[] = "ImportError";
 static const char __pyx_k_MemoryError[] = "MemoryError";
 static const char __pyx_k_PickleError[] = "PickleError";
+static const char __pyx_k_fixed_words[] = "fixed_words";
 static const char __pyx_k_RuntimeError[] = "RuntimeError";
 static const char __pyx_k_bplda__bplda[] = "bplda._bplda";
 static const char __pyx_k_pyx_checksum[] = "__pyx_checksum";
@@ -2391,6 +2392,7 @@ static PyObject *__pyx_n_s_dtype_is_object;
 static PyObject *__pyx_n_s_encode;
 static PyObject *__pyx_n_s_enumerate;
 static PyObject *__pyx_n_s_error;
+static PyObject *__pyx_n_s_fixed_words;
 static PyObject *__pyx_n_s_flags;
 static PyObject *__pyx_n_s_float;
 static PyObject *__pyx_n_s_format;
@@ -2491,7 +2493,7 @@ static PyObject *__pyx_n_s_z_i;
 static PyObject *__pyx_n_s_zeros;
 static PyObject *__pyx_pf_5bplda_6_bplda_update_neighs(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_mu, __Pyx_memviewslice __pyx_v_word_topic_matrix, __Pyx_memviewslice __pyx_v_topic_document_matrix, __Pyx_memviewslice __pyx_v_w, __Pyx_memviewslice __pyx_v_d, __Pyx_memviewslice __pyx_v_x, int __pyx_v_K, CYTHON_UNUSED int __pyx_v_N); /* proto */
 static PyObject *__pyx_pf_5bplda_6_bplda_2update_mu_async(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_mu, __Pyx_memviewslice __pyx_v_word_topic_matrix, __Pyx_memviewslice __pyx_v_topic_document_matrix, __Pyx_memviewslice __pyx_v_w, __Pyx_memviewslice __pyx_v_d, __Pyx_memviewslice __pyx_v_x, double __pyx_v_alpha, double __pyx_v_beta, int __pyx_v_K, int __pyx_v_N); /* proto */
-static PyObject *__pyx_pf_5bplda_6_bplda_4collapsed_gibbs_sampling(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_word, __Pyx_memviewslice __pyx_v_doc, __Pyx_memviewslice __pyx_v_multiple, __Pyx_memviewslice __pyx_v_z_assign, __Pyx_memviewslice __pyx_v_word_topic_matrix, __Pyx_memviewslice __pyx_v_topic_document_matrix, __Pyx_memviewslice __pyx_v_rands, int __pyx_v_num_words, int __pyx_v_num_topics, int __pyx_v_voc_size, double __pyx_v_alpha, double __pyx_v_beta, __Pyx_memviewslice __pyx_v_doc_counts, __Pyx_memviewslice __pyx_v_topic_counts); /* proto */
+static PyObject *__pyx_pf_5bplda_6_bplda_4collapsed_gibbs_sampling(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_word, __Pyx_memviewslice __pyx_v_doc, __Pyx_memviewslice __pyx_v_multiple, __Pyx_memviewslice __pyx_v_z_assign, __Pyx_memviewslice __pyx_v_word_topic_matrix, __Pyx_memviewslice __pyx_v_topic_document_matrix, __Pyx_memviewslice __pyx_v_rands, int __pyx_v_num_words, int __pyx_v_num_topics, int __pyx_v_voc_size, double __pyx_v_alpha, double __pyx_v_beta, __Pyx_memviewslice __pyx_v_doc_counts, __Pyx_memviewslice __pyx_v_topic_counts, int __pyx_v_fixed_words); /* proto */
 static PyObject *__pyx_pf_5bplda_6_bplda_6_marginal_loglikelihood(CYTHON_UNUSED PyObject *__pyx_self, double __pyx_v_loglikeli, __Pyx_memviewslice __pyx_v_wt, __Pyx_memviewslice __pyx_v_td, int __pyx_v_num_words, int __pyx_v_num_docs, int __pyx_v_num_topics); /* proto */
 static PyObject *__pyx_pf_5bplda_6_bplda_8_loglikelihood(CYTHON_UNUSED PyObject *__pyx_self, double __pyx_v_loglikeli, __Pyx_memviewslice __pyx_v_wt, __Pyx_memviewslice __pyx_v_td, int __pyx_v_num_words, int __pyx_v_num_docs, int __pyx_v_num_topics); /* proto */
 static int __pyx_array___pyx_pf_15View_dot_MemoryView_5array___cinit__(struct __pyx_array_obj *__pyx_v_self, PyObject *__pyx_v_shape, Py_ssize_t __pyx_v_itemsize, PyObject *__pyx_v_format, PyObject *__pyx_v_mode, int __pyx_v_allocate_buffer); /* proto */
@@ -3879,6 +3881,7 @@ static PyObject *__pyx_pw_5bplda_6_bplda_5collapsed_gibbs_sampling(PyObject *__p
   double __pyx_v_beta;
   __Pyx_memviewslice __pyx_v_doc_counts = { 0, 0, { 0 }, { 0 }, { 0 } };
   __Pyx_memviewslice __pyx_v_topic_counts = { 0, 0, { 0 }, { 0 }, { 0 } };
+  int __pyx_v_fixed_words;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -3886,12 +3889,14 @@ static PyObject *__pyx_pw_5bplda_6_bplda_5collapsed_gibbs_sampling(PyObject *__p
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("collapsed_gibbs_sampling (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_word,&__pyx_n_s_doc,&__pyx_n_s_multiple,&__pyx_n_s_z_assign,&__pyx_n_s_word_topic_matrix,&__pyx_n_s_topic_document_matrix,&__pyx_n_s_rands,&__pyx_n_s_num_words,&__pyx_n_s_num_topics,&__pyx_n_s_voc_size,&__pyx_n_s_alpha,&__pyx_n_s_beta,&__pyx_n_s_doc_counts,&__pyx_n_s_topic_counts,0};
-    PyObject* values[14] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_word,&__pyx_n_s_doc,&__pyx_n_s_multiple,&__pyx_n_s_z_assign,&__pyx_n_s_word_topic_matrix,&__pyx_n_s_topic_document_matrix,&__pyx_n_s_rands,&__pyx_n_s_num_words,&__pyx_n_s_num_topics,&__pyx_n_s_voc_size,&__pyx_n_s_alpha,&__pyx_n_s_beta,&__pyx_n_s_doc_counts,&__pyx_n_s_topic_counts,&__pyx_n_s_fixed_words,0};
+    PyObject* values[15] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
       switch (pos_args) {
+        case 15: values[14] = PyTuple_GET_ITEM(__pyx_args, 14);
+        CYTHON_FALLTHROUGH;
         case 14: values[13] = PyTuple_GET_ITEM(__pyx_args, 13);
         CYTHON_FALLTHROUGH;
         case 13: values[12] = PyTuple_GET_ITEM(__pyx_args, 12);
@@ -3932,85 +3937,91 @@ static PyObject *__pyx_pw_5bplda_6_bplda_5collapsed_gibbs_sampling(PyObject *__p
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_doc)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("collapsed_gibbs_sampling", 1, 14, 14, 1); __PYX_ERR(0, 145, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("collapsed_gibbs_sampling", 1, 15, 15, 1); __PYX_ERR(0, 145, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_multiple)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("collapsed_gibbs_sampling", 1, 14, 14, 2); __PYX_ERR(0, 145, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("collapsed_gibbs_sampling", 1, 15, 15, 2); __PYX_ERR(0, 145, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_z_assign)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("collapsed_gibbs_sampling", 1, 14, 14, 3); __PYX_ERR(0, 145, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("collapsed_gibbs_sampling", 1, 15, 15, 3); __PYX_ERR(0, 145, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  4:
         if (likely((values[4] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_word_topic_matrix)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("collapsed_gibbs_sampling", 1, 14, 14, 4); __PYX_ERR(0, 145, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("collapsed_gibbs_sampling", 1, 15, 15, 4); __PYX_ERR(0, 145, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  5:
         if (likely((values[5] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_topic_document_matrix)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("collapsed_gibbs_sampling", 1, 14, 14, 5); __PYX_ERR(0, 145, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("collapsed_gibbs_sampling", 1, 15, 15, 5); __PYX_ERR(0, 145, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  6:
         if (likely((values[6] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_rands)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("collapsed_gibbs_sampling", 1, 14, 14, 6); __PYX_ERR(0, 145, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("collapsed_gibbs_sampling", 1, 15, 15, 6); __PYX_ERR(0, 145, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  7:
         if (likely((values[7] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_num_words)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("collapsed_gibbs_sampling", 1, 14, 14, 7); __PYX_ERR(0, 145, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("collapsed_gibbs_sampling", 1, 15, 15, 7); __PYX_ERR(0, 145, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  8:
         if (likely((values[8] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_num_topics)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("collapsed_gibbs_sampling", 1, 14, 14, 8); __PYX_ERR(0, 145, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("collapsed_gibbs_sampling", 1, 15, 15, 8); __PYX_ERR(0, 145, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  9:
         if (likely((values[9] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_voc_size)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("collapsed_gibbs_sampling", 1, 14, 14, 9); __PYX_ERR(0, 145, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("collapsed_gibbs_sampling", 1, 15, 15, 9); __PYX_ERR(0, 145, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case 10:
         if (likely((values[10] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_alpha)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("collapsed_gibbs_sampling", 1, 14, 14, 10); __PYX_ERR(0, 145, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("collapsed_gibbs_sampling", 1, 15, 15, 10); __PYX_ERR(0, 145, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case 11:
         if (likely((values[11] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_beta)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("collapsed_gibbs_sampling", 1, 14, 14, 11); __PYX_ERR(0, 145, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("collapsed_gibbs_sampling", 1, 15, 15, 11); __PYX_ERR(0, 145, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case 12:
         if (likely((values[12] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_doc_counts)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("collapsed_gibbs_sampling", 1, 14, 14, 12); __PYX_ERR(0, 145, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("collapsed_gibbs_sampling", 1, 15, 15, 12); __PYX_ERR(0, 145, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case 13:
         if (likely((values[13] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_topic_counts)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("collapsed_gibbs_sampling", 1, 14, 14, 13); __PYX_ERR(0, 145, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("collapsed_gibbs_sampling", 1, 15, 15, 13); __PYX_ERR(0, 145, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case 14:
+        if (likely((values[14] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_fixed_words)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("collapsed_gibbs_sampling", 1, 15, 15, 14); __PYX_ERR(0, 145, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "collapsed_gibbs_sampling") < 0)) __PYX_ERR(0, 145, __pyx_L3_error)
       }
-    } else if (PyTuple_GET_SIZE(__pyx_args) != 14) {
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 15) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
@@ -4027,6 +4038,7 @@ static PyObject *__pyx_pw_5bplda_6_bplda_5collapsed_gibbs_sampling(PyObject *__p
       values[11] = PyTuple_GET_ITEM(__pyx_args, 11);
       values[12] = PyTuple_GET_ITEM(__pyx_args, 12);
       values[13] = PyTuple_GET_ITEM(__pyx_args, 13);
+      values[14] = PyTuple_GET_ITEM(__pyx_args, 14);
     }
     __pyx_v_word = __Pyx_PyObject_to_MemoryviewSlice_ds_int(values[0], PyBUF_WRITABLE); if (unlikely(!__pyx_v_word.memview)) __PYX_ERR(0, 145, __pyx_L3_error)
     __pyx_v_doc = __Pyx_PyObject_to_MemoryviewSlice_ds_int(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_doc.memview)) __PYX_ERR(0, 146, __pyx_L3_error)
@@ -4042,23 +4054,24 @@ static PyObject *__pyx_pw_5bplda_6_bplda_5collapsed_gibbs_sampling(PyObject *__p
     __pyx_v_beta = __pyx_PyFloat_AsDouble(values[11]); if (unlikely((__pyx_v_beta == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 156, __pyx_L3_error)
     __pyx_v_doc_counts = __Pyx_PyObject_to_MemoryviewSlice_ds_double(values[12], PyBUF_WRITABLE); if (unlikely(!__pyx_v_doc_counts.memview)) __PYX_ERR(0, 157, __pyx_L3_error)
     __pyx_v_topic_counts = __Pyx_PyObject_to_MemoryviewSlice_ds_double(values[13], PyBUF_WRITABLE); if (unlikely(!__pyx_v_topic_counts.memview)) __PYX_ERR(0, 158, __pyx_L3_error)
+    __pyx_v_fixed_words = __Pyx_PyInt_As_int(values[14]); if (unlikely((__pyx_v_fixed_words == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 159, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("collapsed_gibbs_sampling", 1, 14, 14, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 145, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("collapsed_gibbs_sampling", 1, 15, 15, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 145, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("bplda._bplda.collapsed_gibbs_sampling", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_5bplda_6_bplda_4collapsed_gibbs_sampling(__pyx_self, __pyx_v_word, __pyx_v_doc, __pyx_v_multiple, __pyx_v_z_assign, __pyx_v_word_topic_matrix, __pyx_v_topic_document_matrix, __pyx_v_rands, __pyx_v_num_words, __pyx_v_num_topics, __pyx_v_voc_size, __pyx_v_alpha, __pyx_v_beta, __pyx_v_doc_counts, __pyx_v_topic_counts);
+  __pyx_r = __pyx_pf_5bplda_6_bplda_4collapsed_gibbs_sampling(__pyx_self, __pyx_v_word, __pyx_v_doc, __pyx_v_multiple, __pyx_v_z_assign, __pyx_v_word_topic_matrix, __pyx_v_topic_document_matrix, __pyx_v_rands, __pyx_v_num_words, __pyx_v_num_topics, __pyx_v_voc_size, __pyx_v_alpha, __pyx_v_beta, __pyx_v_doc_counts, __pyx_v_topic_counts, __pyx_v_fixed_words);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5bplda_6_bplda_4collapsed_gibbs_sampling(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_word, __Pyx_memviewslice __pyx_v_doc, __Pyx_memviewslice __pyx_v_multiple, __Pyx_memviewslice __pyx_v_z_assign, __Pyx_memviewslice __pyx_v_word_topic_matrix, __Pyx_memviewslice __pyx_v_topic_document_matrix, __Pyx_memviewslice __pyx_v_rands, int __pyx_v_num_words, int __pyx_v_num_topics, int __pyx_v_voc_size, double __pyx_v_alpha, double __pyx_v_beta, __Pyx_memviewslice __pyx_v_doc_counts, __Pyx_memviewslice __pyx_v_topic_counts) {
+static PyObject *__pyx_pf_5bplda_6_bplda_4collapsed_gibbs_sampling(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_word, __Pyx_memviewslice __pyx_v_doc, __Pyx_memviewslice __pyx_v_multiple, __Pyx_memviewslice __pyx_v_z_assign, __Pyx_memviewslice __pyx_v_word_topic_matrix, __Pyx_memviewslice __pyx_v_topic_document_matrix, __Pyx_memviewslice __pyx_v_rands, int __pyx_v_num_words, int __pyx_v_num_topics, int __pyx_v_voc_size, double __pyx_v_alpha, double __pyx_v_beta, __Pyx_memviewslice __pyx_v_doc_counts, __Pyx_memviewslice __pyx_v_topic_counts, int __pyx_v_fixed_words) {
   int __pyx_v_i;
   int __pyx_v_w_i;
   int __pyx_v_d_i;
@@ -4081,59 +4094,59 @@ static PyObject *__pyx_pf_5bplda_6_bplda_4collapsed_gibbs_sampling(CYTHON_UNUSED
   int __pyx_t_8;
   int __pyx_t_9;
   Py_ssize_t __pyx_t_10;
-  Py_ssize_t __pyx_t_11;
-  int __pyx_t_12;
+  int __pyx_t_11;
+  Py_ssize_t __pyx_t_12;
   int __pyx_t_13;
   int __pyx_t_14;
-  double __pyx_t_15;
+  int __pyx_t_15;
   double __pyx_t_16;
   double __pyx_t_17;
-  int __pyx_t_18;
+  double __pyx_t_18;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("collapsed_gibbs_sampling", 0);
 
-  /* "bplda/_bplda.pyx":194
+  /* "bplda/_bplda.pyx":195
  *     cdef int i, w_i, d_i, z_i, k, n_words, test
  *     cdef double prob_norm, m_i, r, p
  *     cdef double[::view.contiguous] prob_z = np.zeros(num_topics, dtype=np.float)             # <<<<<<<<<<<<<<
  * 
  *     test=0
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 194, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 195, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 194, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 195, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_num_topics); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 194, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_num_topics); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 195, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 194, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 195, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 194, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 195, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 194, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 195, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_float); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 194, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_float); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 195, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 194, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 195, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 194, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 195, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_double(__pyx_t_5, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 194, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_double(__pyx_t_5, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 195, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_prob_z = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "bplda/_bplda.pyx":196
+  /* "bplda/_bplda.pyx":197
  *     cdef double[::view.contiguous] prob_z = np.zeros(num_topics, dtype=np.float)
  * 
  *     test=0             # <<<<<<<<<<<<<<
@@ -4142,7 +4155,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_4collapsed_gibbs_sampling(CYTHON_UNUSED
  */
   __pyx_v_test = 0;
 
-  /* "bplda/_bplda.pyx":197
+  /* "bplda/_bplda.pyx":198
  * 
  *     test=0
  *     with nogil:             # <<<<<<<<<<<<<<
@@ -4157,7 +4170,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_4collapsed_gibbs_sampling(CYTHON_UNUSED
       #endif
       /*try:*/ {
 
-        /* "bplda/_bplda.pyx":198
+        /* "bplda/_bplda.pyx":199
  *     test=0
  *     with nogil:
  *         for i in range(num_words):             # <<<<<<<<<<<<<<
@@ -4169,7 +4182,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_4collapsed_gibbs_sampling(CYTHON_UNUSED
         for (__pyx_t_9 = 0; __pyx_t_9 < __pyx_t_8; __pyx_t_9+=1) {
           __pyx_v_i = __pyx_t_9;
 
-          /* "bplda/_bplda.pyx":199
+          /* "bplda/_bplda.pyx":200
  *     with nogil:
  *         for i in range(num_words):
  *             w_i = word[i]             # <<<<<<<<<<<<<<
@@ -4179,7 +4192,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_4collapsed_gibbs_sampling(CYTHON_UNUSED
           __pyx_t_10 = __pyx_v_i;
           __pyx_v_w_i = (*((int *) ( /* dim=0 */ (__pyx_v_word.data + __pyx_t_10 * __pyx_v_word.strides[0]) )));
 
-          /* "bplda/_bplda.pyx":200
+          /* "bplda/_bplda.pyx":201
  *         for i in range(num_words):
  *             w_i = word[i]
  *             d_i = doc[i]             # <<<<<<<<<<<<<<
@@ -4189,7 +4202,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_4collapsed_gibbs_sampling(CYTHON_UNUSED
           __pyx_t_10 = __pyx_v_i;
           __pyx_v_d_i = (*((int *) ( /* dim=0 */ (__pyx_v_doc.data + __pyx_t_10 * __pyx_v_doc.strides[0]) )));
 
-          /* "bplda/_bplda.pyx":201
+          /* "bplda/_bplda.pyx":202
  *             w_i = word[i]
  *             d_i = doc[i]
  *             m_i = multiple[i]             # <<<<<<<<<<<<<<
@@ -4199,7 +4212,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_4collapsed_gibbs_sampling(CYTHON_UNUSED
           __pyx_t_10 = __pyx_v_i;
           __pyx_v_m_i = (*((double *) ( /* dim=0 */ (__pyx_v_multiple.data + __pyx_t_10 * __pyx_v_multiple.strides[0]) )));
 
-          /* "bplda/_bplda.pyx":202
+          /* "bplda/_bplda.pyx":203
  *             d_i = doc[i]
  *             m_i = multiple[i]
  *             z_i = z_assign[i]             # <<<<<<<<<<<<<<
@@ -4209,49 +4222,68 @@ static PyObject *__pyx_pf_5bplda_6_bplda_4collapsed_gibbs_sampling(CYTHON_UNUSED
           __pyx_t_10 = __pyx_v_i;
           __pyx_v_z_i = (*((int *) ( /* dim=0 */ (__pyx_v_z_assign.data + __pyx_t_10 * __pyx_v_z_assign.strides[0]) )));
 
-          /* "bplda/_bplda.pyx":204
+          /* "bplda/_bplda.pyx":205
  *             z_i = z_assign[i]
  * 
  *             doc_counts[d_i] -= m_i             # <<<<<<<<<<<<<<
  *             topic_counts[z_i] -= m_i
- *             word_topic_matrix[w_i, z_i] -= m_i
+ *             if fixed_words == 0:
  */
           __pyx_t_10 = __pyx_v_d_i;
           *((double *) ( /* dim=0 */ (__pyx_v_doc_counts.data + __pyx_t_10 * __pyx_v_doc_counts.strides[0]) )) -= __pyx_v_m_i;
 
-          /* "bplda/_bplda.pyx":205
+          /* "bplda/_bplda.pyx":206
  * 
  *             doc_counts[d_i] -= m_i
  *             topic_counts[z_i] -= m_i             # <<<<<<<<<<<<<<
- *             word_topic_matrix[w_i, z_i] -= m_i
- *             topic_document_matrix[z_i, d_i] -= m_i
+ *             if fixed_words == 0:
+ *                 word_topic_matrix[w_i, z_i] -= m_i
  */
           __pyx_t_10 = __pyx_v_z_i;
           *((double *) ( /* dim=0 */ (__pyx_v_topic_counts.data + __pyx_t_10 * __pyx_v_topic_counts.strides[0]) )) -= __pyx_v_m_i;
 
-          /* "bplda/_bplda.pyx":206
+          /* "bplda/_bplda.pyx":207
  *             doc_counts[d_i] -= m_i
  *             topic_counts[z_i] -= m_i
- *             word_topic_matrix[w_i, z_i] -= m_i             # <<<<<<<<<<<<<<
+ *             if fixed_words == 0:             # <<<<<<<<<<<<<<
+ *                 word_topic_matrix[w_i, z_i] -= m_i
+ *             topic_document_matrix[z_i, d_i] -= m_i
+ */
+          __pyx_t_11 = ((__pyx_v_fixed_words == 0) != 0);
+          if (__pyx_t_11) {
+
+            /* "bplda/_bplda.pyx":208
+ *             topic_counts[z_i] -= m_i
+ *             if fixed_words == 0:
+ *                 word_topic_matrix[w_i, z_i] -= m_i             # <<<<<<<<<<<<<<
  *             topic_document_matrix[z_i, d_i] -= m_i
  * 
  */
-          __pyx_t_10 = __pyx_v_w_i;
-          __pyx_t_11 = __pyx_v_z_i;
-          *((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_word_topic_matrix.data + __pyx_t_10 * __pyx_v_word_topic_matrix.strides[0]) ) + __pyx_t_11 * __pyx_v_word_topic_matrix.strides[1]) )) -= __pyx_v_m_i;
+            __pyx_t_10 = __pyx_v_w_i;
+            __pyx_t_12 = __pyx_v_z_i;
+            *((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_word_topic_matrix.data + __pyx_t_10 * __pyx_v_word_topic_matrix.strides[0]) ) + __pyx_t_12 * __pyx_v_word_topic_matrix.strides[1]) )) -= __pyx_v_m_i;
 
-          /* "bplda/_bplda.pyx":207
+            /* "bplda/_bplda.pyx":207
+ *             doc_counts[d_i] -= m_i
  *             topic_counts[z_i] -= m_i
- *             word_topic_matrix[w_i, z_i] -= m_i
+ *             if fixed_words == 0:             # <<<<<<<<<<<<<<
+ *                 word_topic_matrix[w_i, z_i] -= m_i
+ *             topic_document_matrix[z_i, d_i] -= m_i
+ */
+          }
+
+          /* "bplda/_bplda.pyx":209
+ *             if fixed_words == 0:
+ *                 word_topic_matrix[w_i, z_i] -= m_i
  *             topic_document_matrix[z_i, d_i] -= m_i             # <<<<<<<<<<<<<<
  * 
  *             prob_norm = 0.0
  */
-          __pyx_t_11 = __pyx_v_z_i;
+          __pyx_t_12 = __pyx_v_z_i;
           __pyx_t_10 = __pyx_v_d_i;
-          *((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_topic_document_matrix.data + __pyx_t_11 * __pyx_v_topic_document_matrix.strides[0]) ) + __pyx_t_10 * __pyx_v_topic_document_matrix.strides[1]) )) -= __pyx_v_m_i;
+          *((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_topic_document_matrix.data + __pyx_t_12 * __pyx_v_topic_document_matrix.strides[0]) ) + __pyx_t_10 * __pyx_v_topic_document_matrix.strides[1]) )) -= __pyx_v_m_i;
 
-          /* "bplda/_bplda.pyx":209
+          /* "bplda/_bplda.pyx":211
  *             topic_document_matrix[z_i, d_i] -= m_i
  * 
  *             prob_norm = 0.0             # <<<<<<<<<<<<<<
@@ -4260,19 +4292,19 @@ static PyObject *__pyx_pf_5bplda_6_bplda_4collapsed_gibbs_sampling(CYTHON_UNUSED
  */
           __pyx_v_prob_norm = 0.0;
 
-          /* "bplda/_bplda.pyx":210
+          /* "bplda/_bplda.pyx":212
  * 
  *             prob_norm = 0.0
  *             for k in range(num_topics):             # <<<<<<<<<<<<<<
  *                 prob_z[k] = (word_topic_matrix[w_i, k] + beta)/(topic_counts[k] + voc_size*beta) * (topic_document_matrix[k, d_i] + alpha)/(doc_counts[d_i] + num_topics*alpha)
  *                 prob_norm += prob_z[k]
  */
-          __pyx_t_12 = __pyx_v_num_topics;
-          __pyx_t_13 = __pyx_t_12;
-          for (__pyx_t_14 = 0; __pyx_t_14 < __pyx_t_13; __pyx_t_14+=1) {
-            __pyx_v_k = __pyx_t_14;
+          __pyx_t_13 = __pyx_v_num_topics;
+          __pyx_t_14 = __pyx_t_13;
+          for (__pyx_t_15 = 0; __pyx_t_15 < __pyx_t_14; __pyx_t_15+=1) {
+            __pyx_v_k = __pyx_t_15;
 
-            /* "bplda/_bplda.pyx":211
+            /* "bplda/_bplda.pyx":213
  *             prob_norm = 0.0
  *             for k in range(num_topics):
  *                 prob_z[k] = (word_topic_matrix[w_i, k] + beta)/(topic_counts[k] + voc_size*beta) * (topic_document_matrix[k, d_i] + alpha)/(doc_counts[d_i] + num_topics*alpha)             # <<<<<<<<<<<<<<
@@ -4280,11 +4312,11 @@ static PyObject *__pyx_pf_5bplda_6_bplda_4collapsed_gibbs_sampling(CYTHON_UNUSED
  * 
  */
             __pyx_t_10 = __pyx_v_w_i;
-            __pyx_t_11 = __pyx_v_k;
-            __pyx_t_15 = ((*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_word_topic_matrix.data + __pyx_t_10 * __pyx_v_word_topic_matrix.strides[0]) ) + __pyx_t_11 * __pyx_v_word_topic_matrix.strides[1]) ))) + __pyx_v_beta);
-            __pyx_t_11 = __pyx_v_k;
-            __pyx_t_16 = ((*((double *) ( /* dim=0 */ (__pyx_v_topic_counts.data + __pyx_t_11 * __pyx_v_topic_counts.strides[0]) ))) + (__pyx_v_voc_size * __pyx_v_beta));
-            if (unlikely(__pyx_t_16 == 0)) {
+            __pyx_t_12 = __pyx_v_k;
+            __pyx_t_16 = ((*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_word_topic_matrix.data + __pyx_t_10 * __pyx_v_word_topic_matrix.strides[0]) ) + __pyx_t_12 * __pyx_v_word_topic_matrix.strides[1]) ))) + __pyx_v_beta);
+            __pyx_t_12 = __pyx_v_k;
+            __pyx_t_17 = ((*((double *) ( /* dim=0 */ (__pyx_v_topic_counts.data + __pyx_t_12 * __pyx_v_topic_counts.strides[0]) ))) + (__pyx_v_voc_size * __pyx_v_beta));
+            if (unlikely(__pyx_t_17 == 0)) {
               #ifdef WITH_THREAD
               PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
               #endif
@@ -4292,14 +4324,14 @@ static PyObject *__pyx_pf_5bplda_6_bplda_4collapsed_gibbs_sampling(CYTHON_UNUSED
               #ifdef WITH_THREAD
               __Pyx_PyGILState_Release(__pyx_gilstate_save);
               #endif
-              __PYX_ERR(0, 211, __pyx_L4_error)
+              __PYX_ERR(0, 213, __pyx_L4_error)
             }
-            __pyx_t_11 = __pyx_v_k;
+            __pyx_t_12 = __pyx_v_k;
             __pyx_t_10 = __pyx_v_d_i;
-            __pyx_t_17 = ((__pyx_t_15 / __pyx_t_16) * ((*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_topic_document_matrix.data + __pyx_t_11 * __pyx_v_topic_document_matrix.strides[0]) ) + __pyx_t_10 * __pyx_v_topic_document_matrix.strides[1]) ))) + __pyx_v_alpha));
+            __pyx_t_18 = ((__pyx_t_16 / __pyx_t_17) * ((*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_topic_document_matrix.data + __pyx_t_12 * __pyx_v_topic_document_matrix.strides[0]) ) + __pyx_t_10 * __pyx_v_topic_document_matrix.strides[1]) ))) + __pyx_v_alpha));
             __pyx_t_10 = __pyx_v_d_i;
-            __pyx_t_16 = ((*((double *) ( /* dim=0 */ (__pyx_v_doc_counts.data + __pyx_t_10 * __pyx_v_doc_counts.strides[0]) ))) + (__pyx_v_num_topics * __pyx_v_alpha));
-            if (unlikely(__pyx_t_16 == 0)) {
+            __pyx_t_17 = ((*((double *) ( /* dim=0 */ (__pyx_v_doc_counts.data + __pyx_t_10 * __pyx_v_doc_counts.strides[0]) ))) + (__pyx_v_num_topics * __pyx_v_alpha));
+            if (unlikely(__pyx_t_17 == 0)) {
               #ifdef WITH_THREAD
               PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
               #endif
@@ -4307,12 +4339,12 @@ static PyObject *__pyx_pf_5bplda_6_bplda_4collapsed_gibbs_sampling(CYTHON_UNUSED
               #ifdef WITH_THREAD
               __Pyx_PyGILState_Release(__pyx_gilstate_save);
               #endif
-              __PYX_ERR(0, 211, __pyx_L4_error)
+              __PYX_ERR(0, 213, __pyx_L4_error)
             }
             __pyx_t_10 = __pyx_v_k;
-            *((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_prob_z.data) + __pyx_t_10)) )) = (__pyx_t_17 / __pyx_t_16);
+            *((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_prob_z.data) + __pyx_t_10)) )) = (__pyx_t_18 / __pyx_t_17);
 
-            /* "bplda/_bplda.pyx":212
+            /* "bplda/_bplda.pyx":214
  *             for k in range(num_topics):
  *                 prob_z[k] = (word_topic_matrix[w_i, k] + beta)/(topic_counts[k] + voc_size*beta) * (topic_document_matrix[k, d_i] + alpha)/(doc_counts[d_i] + num_topics*alpha)
  *                 prob_norm += prob_z[k]             # <<<<<<<<<<<<<<
@@ -4323,7 +4355,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_4collapsed_gibbs_sampling(CYTHON_UNUSED
             __pyx_v_prob_norm = (__pyx_v_prob_norm + (*((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_prob_z.data) + __pyx_t_10)) ))));
           }
 
-          /* "bplda/_bplda.pyx":214
+          /* "bplda/_bplda.pyx":216
  *                 prob_norm += prob_z[k]
  * 
  *             p = 0.0             # <<<<<<<<<<<<<<
@@ -4332,19 +4364,19 @@ static PyObject *__pyx_pf_5bplda_6_bplda_4collapsed_gibbs_sampling(CYTHON_UNUSED
  */
           __pyx_v_p = 0.0;
 
-          /* "bplda/_bplda.pyx":215
+          /* "bplda/_bplda.pyx":217
  * 
  *             p = 0.0
  *             for k in range(num_topics):             # <<<<<<<<<<<<<<
  *                 p += prob_z[k]/prob_norm
  *                 if rands[i] <= p:
  */
-          __pyx_t_12 = __pyx_v_num_topics;
-          __pyx_t_13 = __pyx_t_12;
-          for (__pyx_t_14 = 0; __pyx_t_14 < __pyx_t_13; __pyx_t_14+=1) {
-            __pyx_v_k = __pyx_t_14;
+          __pyx_t_13 = __pyx_v_num_topics;
+          __pyx_t_14 = __pyx_t_13;
+          for (__pyx_t_15 = 0; __pyx_t_15 < __pyx_t_14; __pyx_t_15+=1) {
+            __pyx_v_k = __pyx_t_15;
 
-            /* "bplda/_bplda.pyx":216
+            /* "bplda/_bplda.pyx":218
  *             p = 0.0
  *             for k in range(num_topics):
  *                 p += prob_z[k]/prob_norm             # <<<<<<<<<<<<<<
@@ -4352,7 +4384,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_4collapsed_gibbs_sampling(CYTHON_UNUSED
  *                     z_i = k
  */
             __pyx_t_10 = __pyx_v_k;
-            __pyx_t_16 = (*((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_prob_z.data) + __pyx_t_10)) )));
+            __pyx_t_17 = (*((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_prob_z.data) + __pyx_t_10)) )));
             if (unlikely(__pyx_v_prob_norm == 0)) {
               #ifdef WITH_THREAD
               PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
@@ -4361,11 +4393,11 @@ static PyObject *__pyx_pf_5bplda_6_bplda_4collapsed_gibbs_sampling(CYTHON_UNUSED
               #ifdef WITH_THREAD
               __Pyx_PyGILState_Release(__pyx_gilstate_save);
               #endif
-              __PYX_ERR(0, 216, __pyx_L4_error)
+              __PYX_ERR(0, 218, __pyx_L4_error)
             }
-            __pyx_v_p = (__pyx_v_p + (__pyx_t_16 / __pyx_v_prob_norm));
+            __pyx_v_p = (__pyx_v_p + (__pyx_t_17 / __pyx_v_prob_norm));
 
-            /* "bplda/_bplda.pyx":217
+            /* "bplda/_bplda.pyx":219
  *             for k in range(num_topics):
  *                 p += prob_z[k]/prob_norm
  *                 if rands[i] <= p:             # <<<<<<<<<<<<<<
@@ -4373,10 +4405,10 @@ static PyObject *__pyx_pf_5bplda_6_bplda_4collapsed_gibbs_sampling(CYTHON_UNUSED
  *                     break
  */
             __pyx_t_10 = __pyx_v_i;
-            __pyx_t_18 = (((*((double *) ( /* dim=0 */ (__pyx_v_rands.data + __pyx_t_10 * __pyx_v_rands.strides[0]) ))) <= __pyx_v_p) != 0);
-            if (__pyx_t_18) {
+            __pyx_t_11 = (((*((double *) ( /* dim=0 */ (__pyx_v_rands.data + __pyx_t_10 * __pyx_v_rands.strides[0]) ))) <= __pyx_v_p) != 0);
+            if (__pyx_t_11) {
 
-              /* "bplda/_bplda.pyx":218
+              /* "bplda/_bplda.pyx":220
  *                 p += prob_z[k]/prob_norm
  *                 if rands[i] <= p:
  *                     z_i = k             # <<<<<<<<<<<<<<
@@ -4385,16 +4417,16 @@ static PyObject *__pyx_pf_5bplda_6_bplda_4collapsed_gibbs_sampling(CYTHON_UNUSED
  */
               __pyx_v_z_i = __pyx_v_k;
 
-              /* "bplda/_bplda.pyx":219
+              /* "bplda/_bplda.pyx":221
  *                 if rands[i] <= p:
  *                     z_i = k
  *                     break             # <<<<<<<<<<<<<<
  * 
  *             z_assign[i] = z_i
  */
-              goto __pyx_L11_break;
+              goto __pyx_L12_break;
 
-              /* "bplda/_bplda.pyx":217
+              /* "bplda/_bplda.pyx":219
  *             for k in range(num_topics):
  *                 p += prob_z[k]/prob_norm
  *                 if rands[i] <= p:             # <<<<<<<<<<<<<<
@@ -4403,9 +4435,9 @@ static PyObject *__pyx_pf_5bplda_6_bplda_4collapsed_gibbs_sampling(CYTHON_UNUSED
  */
             }
           }
-          __pyx_L11_break:;
+          __pyx_L12_break:;
 
-          /* "bplda/_bplda.pyx":221
+          /* "bplda/_bplda.pyx":223
  *                     break
  * 
  *             z_assign[i] = z_i             # <<<<<<<<<<<<<<
@@ -4415,51 +4447,70 @@ static PyObject *__pyx_pf_5bplda_6_bplda_4collapsed_gibbs_sampling(CYTHON_UNUSED
           __pyx_t_10 = __pyx_v_i;
           *((int *) ( /* dim=0 */ (__pyx_v_z_assign.data + __pyx_t_10 * __pyx_v_z_assign.strides[0]) )) = __pyx_v_z_i;
 
-          /* "bplda/_bplda.pyx":222
+          /* "bplda/_bplda.pyx":224
  * 
  *             z_assign[i] = z_i
  *             doc_counts[d_i] += m_i             # <<<<<<<<<<<<<<
  *             topic_counts[z_i] += m_i
- *             word_topic_matrix[w_i, z_i] += m_i
+ *             if fixed_words == 0:
  */
           __pyx_t_10 = __pyx_v_d_i;
           *((double *) ( /* dim=0 */ (__pyx_v_doc_counts.data + __pyx_t_10 * __pyx_v_doc_counts.strides[0]) )) += __pyx_v_m_i;
 
-          /* "bplda/_bplda.pyx":223
+          /* "bplda/_bplda.pyx":225
  *             z_assign[i] = z_i
  *             doc_counts[d_i] += m_i
  *             topic_counts[z_i] += m_i             # <<<<<<<<<<<<<<
- *             word_topic_matrix[w_i, z_i] += m_i
- *             topic_document_matrix[z_i, d_i] += m_i
+ *             if fixed_words == 0:
+ *                 word_topic_matrix[w_i, z_i] += m_i
  */
           __pyx_t_10 = __pyx_v_z_i;
           *((double *) ( /* dim=0 */ (__pyx_v_topic_counts.data + __pyx_t_10 * __pyx_v_topic_counts.strides[0]) )) += __pyx_v_m_i;
 
-          /* "bplda/_bplda.pyx":224
+          /* "bplda/_bplda.pyx":226
  *             doc_counts[d_i] += m_i
  *             topic_counts[z_i] += m_i
- *             word_topic_matrix[w_i, z_i] += m_i             # <<<<<<<<<<<<<<
+ *             if fixed_words == 0:             # <<<<<<<<<<<<<<
+ *                 word_topic_matrix[w_i, z_i] += m_i
+ *             topic_document_matrix[z_i, d_i] += m_i
+ */
+          __pyx_t_11 = ((__pyx_v_fixed_words == 0) != 0);
+          if (__pyx_t_11) {
+
+            /* "bplda/_bplda.pyx":227
+ *             topic_counts[z_i] += m_i
+ *             if fixed_words == 0:
+ *                 word_topic_matrix[w_i, z_i] += m_i             # <<<<<<<<<<<<<<
  *             topic_document_matrix[z_i, d_i] += m_i
  * 
  */
-          __pyx_t_10 = __pyx_v_w_i;
-          __pyx_t_11 = __pyx_v_z_i;
-          *((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_word_topic_matrix.data + __pyx_t_10 * __pyx_v_word_topic_matrix.strides[0]) ) + __pyx_t_11 * __pyx_v_word_topic_matrix.strides[1]) )) += __pyx_v_m_i;
+            __pyx_t_10 = __pyx_v_w_i;
+            __pyx_t_12 = __pyx_v_z_i;
+            *((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_word_topic_matrix.data + __pyx_t_10 * __pyx_v_word_topic_matrix.strides[0]) ) + __pyx_t_12 * __pyx_v_word_topic_matrix.strides[1]) )) += __pyx_v_m_i;
 
-          /* "bplda/_bplda.pyx":225
+            /* "bplda/_bplda.pyx":226
+ *             doc_counts[d_i] += m_i
  *             topic_counts[z_i] += m_i
- *             word_topic_matrix[w_i, z_i] += m_i
+ *             if fixed_words == 0:             # <<<<<<<<<<<<<<
+ *                 word_topic_matrix[w_i, z_i] += m_i
+ *             topic_document_matrix[z_i, d_i] += m_i
+ */
+          }
+
+          /* "bplda/_bplda.pyx":228
+ *             if fixed_words == 0:
+ *                 word_topic_matrix[w_i, z_i] += m_i
  *             topic_document_matrix[z_i, d_i] += m_i             # <<<<<<<<<<<<<<
  * 
  *     return 0
  */
-          __pyx_t_11 = __pyx_v_z_i;
+          __pyx_t_12 = __pyx_v_z_i;
           __pyx_t_10 = __pyx_v_d_i;
-          *((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_topic_document_matrix.data + __pyx_t_11 * __pyx_v_topic_document_matrix.strides[0]) ) + __pyx_t_10 * __pyx_v_topic_document_matrix.strides[1]) )) += __pyx_v_m_i;
+          *((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_topic_document_matrix.data + __pyx_t_12 * __pyx_v_topic_document_matrix.strides[0]) ) + __pyx_t_10 * __pyx_v_topic_document_matrix.strides[1]) )) += __pyx_v_m_i;
         }
       }
 
-      /* "bplda/_bplda.pyx":197
+      /* "bplda/_bplda.pyx":198
  * 
  *     test=0
  *     with nogil:             # <<<<<<<<<<<<<<
@@ -4485,7 +4536,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_4collapsed_gibbs_sampling(CYTHON_UNUSED
       }
   }
 
-  /* "bplda/_bplda.pyx":227
+  /* "bplda/_bplda.pyx":230
  *             topic_document_matrix[z_i, d_i] += m_i
  * 
  *     return 0             # <<<<<<<<<<<<<<
@@ -4531,7 +4582,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_4collapsed_gibbs_sampling(CYTHON_UNUSED
   return __pyx_r;
 }
 
-/* "bplda/_bplda.pyx":232
+/* "bplda/_bplda.pyx":235
  * @boundscheck(False)
  * @wraparound(False)
  * def _marginal_loglikelihood(double loglikeli,             # <<<<<<<<<<<<<<
@@ -4587,35 +4638,35 @@ static PyObject *__pyx_pw_5bplda_6_bplda_7_marginal_loglikelihood(PyObject *__py
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_wt)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("_marginal_loglikelihood", 1, 6, 6, 1); __PYX_ERR(0, 232, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("_marginal_loglikelihood", 1, 6, 6, 1); __PYX_ERR(0, 235, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_td)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("_marginal_loglikelihood", 1, 6, 6, 2); __PYX_ERR(0, 232, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("_marginal_loglikelihood", 1, 6, 6, 2); __PYX_ERR(0, 235, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_num_words)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("_marginal_loglikelihood", 1, 6, 6, 3); __PYX_ERR(0, 232, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("_marginal_loglikelihood", 1, 6, 6, 3); __PYX_ERR(0, 235, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  4:
         if (likely((values[4] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_num_docs)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("_marginal_loglikelihood", 1, 6, 6, 4); __PYX_ERR(0, 232, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("_marginal_loglikelihood", 1, 6, 6, 4); __PYX_ERR(0, 235, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  5:
         if (likely((values[5] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_num_topics)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("_marginal_loglikelihood", 1, 6, 6, 5); __PYX_ERR(0, 232, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("_marginal_loglikelihood", 1, 6, 6, 5); __PYX_ERR(0, 235, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "_marginal_loglikelihood") < 0)) __PYX_ERR(0, 232, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "_marginal_loglikelihood") < 0)) __PYX_ERR(0, 235, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 6) {
       goto __pyx_L5_argtuple_error;
@@ -4627,16 +4678,16 @@ static PyObject *__pyx_pw_5bplda_6_bplda_7_marginal_loglikelihood(PyObject *__py
       values[4] = PyTuple_GET_ITEM(__pyx_args, 4);
       values[5] = PyTuple_GET_ITEM(__pyx_args, 5);
     }
-    __pyx_v_loglikeli = __pyx_PyFloat_AsDouble(values[0]); if (unlikely((__pyx_v_loglikeli == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 232, __pyx_L3_error)
-    __pyx_v_wt = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_wt.memview)) __PYX_ERR(0, 233, __pyx_L3_error)
-    __pyx_v_td = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(values[2], PyBUF_WRITABLE); if (unlikely(!__pyx_v_td.memview)) __PYX_ERR(0, 234, __pyx_L3_error)
-    __pyx_v_num_words = __Pyx_PyInt_As_int(values[3]); if (unlikely((__pyx_v_num_words == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 235, __pyx_L3_error)
-    __pyx_v_num_docs = __Pyx_PyInt_As_int(values[4]); if (unlikely((__pyx_v_num_docs == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 236, __pyx_L3_error)
-    __pyx_v_num_topics = __Pyx_PyInt_As_int(values[5]); if (unlikely((__pyx_v_num_topics == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 237, __pyx_L3_error)
+    __pyx_v_loglikeli = __pyx_PyFloat_AsDouble(values[0]); if (unlikely((__pyx_v_loglikeli == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 235, __pyx_L3_error)
+    __pyx_v_wt = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_wt.memview)) __PYX_ERR(0, 236, __pyx_L3_error)
+    __pyx_v_td = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(values[2], PyBUF_WRITABLE); if (unlikely(!__pyx_v_td.memview)) __PYX_ERR(0, 237, __pyx_L3_error)
+    __pyx_v_num_words = __Pyx_PyInt_As_int(values[3]); if (unlikely((__pyx_v_num_words == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 238, __pyx_L3_error)
+    __pyx_v_num_docs = __Pyx_PyInt_As_int(values[4]); if (unlikely((__pyx_v_num_docs == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 239, __pyx_L3_error)
+    __pyx_v_num_topics = __Pyx_PyInt_As_int(values[5]); if (unlikely((__pyx_v_num_topics == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 240, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("_marginal_loglikelihood", 1, 6, 6, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 232, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("_marginal_loglikelihood", 1, 6, 6, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 235, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("bplda._bplda._marginal_loglikelihood", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -4684,46 +4735,46 @@ static PyObject *__pyx_pf_5bplda_6_bplda_6_marginal_loglikelihood(CYTHON_UNUSED 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_marginal_loglikelihood", 0);
 
-  /* "bplda/_bplda.pyx":260
+  /* "bplda/_bplda.pyx":263
  * 
  *     cdef int i, j, k
  *     cdef double[::view.contiguous] buff = np.zeros(num_topics, dtype=np.float)             # <<<<<<<<<<<<<<
  *     cdef double  maxlog, likeli
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 260, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 263, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 260, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 263, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_num_topics); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 260, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_num_topics); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 263, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 260, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 263, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 260, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 263, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 260, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 263, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_float); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 260, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_float); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 263, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 260, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 263, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 260, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 263, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_double(__pyx_t_5, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 260, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_double(__pyx_t_5, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 263, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_buff = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "bplda/_bplda.pyx":264
+  /* "bplda/_bplda.pyx":267
  * 
  *     # compute new mu
  *     with nogil:             # <<<<<<<<<<<<<<
@@ -4738,7 +4789,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_6_marginal_loglikelihood(CYTHON_UNUSED 
       #endif
       /*try:*/ {
 
-        /* "bplda/_bplda.pyx":265
+        /* "bplda/_bplda.pyx":268
  *     # compute new mu
  *     with nogil:
  *         for i in range(num_words):             # <<<<<<<<<<<<<<
@@ -4750,7 +4801,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_6_marginal_loglikelihood(CYTHON_UNUSED 
         for (__pyx_t_9 = 0; __pyx_t_9 < __pyx_t_8; __pyx_t_9+=1) {
           __pyx_v_i = __pyx_t_9;
 
-          /* "bplda/_bplda.pyx":266
+          /* "bplda/_bplda.pyx":269
  *     with nogil:
  *         for i in range(num_words):
  *             for j in range(num_docs):             # <<<<<<<<<<<<<<
@@ -4762,7 +4813,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_6_marginal_loglikelihood(CYTHON_UNUSED 
           for (__pyx_t_12 = 0; __pyx_t_12 < __pyx_t_11; __pyx_t_12+=1) {
             __pyx_v_j = __pyx_t_12;
 
-            /* "bplda/_bplda.pyx":268
+            /* "bplda/_bplda.pyx":271
  *             for j in range(num_docs):
  * 
  *                 maxlog = -INFINITY             # <<<<<<<<<<<<<<
@@ -4771,7 +4822,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_6_marginal_loglikelihood(CYTHON_UNUSED 
  */
             __pyx_v_maxlog = (-INFINITY);
 
-            /* "bplda/_bplda.pyx":269
+            /* "bplda/_bplda.pyx":272
  * 
  *                 maxlog = -INFINITY
  *                 for k in range(num_topics):             # <<<<<<<<<<<<<<
@@ -4783,7 +4834,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_6_marginal_loglikelihood(CYTHON_UNUSED 
             for (__pyx_t_15 = 0; __pyx_t_15 < __pyx_t_14; __pyx_t_15+=1) {
               __pyx_v_k = __pyx_t_15;
 
-              /* "bplda/_bplda.pyx":270
+              /* "bplda/_bplda.pyx":273
  *                 maxlog = -INFINITY
  *                 for k in range(num_topics):
  *                     buff[k] = wt[i, k] + td[k, j]             # <<<<<<<<<<<<<<
@@ -4797,7 +4848,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_6_marginal_loglikelihood(CYTHON_UNUSED 
               __pyx_t_20 = __pyx_v_k;
               *((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_buff.data) + __pyx_t_20)) )) = ((*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_wt.data + __pyx_t_16 * __pyx_v_wt.strides[0]) ) + __pyx_t_17 * __pyx_v_wt.strides[1]) ))) + (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_td.data + __pyx_t_18 * __pyx_v_td.strides[0]) ) + __pyx_t_19 * __pyx_v_td.strides[1]) ))));
 
-              /* "bplda/_bplda.pyx":271
+              /* "bplda/_bplda.pyx":274
  *                 for k in range(num_topics):
  *                     buff[k] = wt[i, k] + td[k, j]
  *                     if maxlog < buff[k]:             # <<<<<<<<<<<<<<
@@ -4808,7 +4859,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_6_marginal_loglikelihood(CYTHON_UNUSED 
               __pyx_t_21 = ((__pyx_v_maxlog < (*((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_buff.data) + __pyx_t_19)) )))) != 0);
               if (__pyx_t_21) {
 
-                /* "bplda/_bplda.pyx":272
+                /* "bplda/_bplda.pyx":275
  *                     buff[k] = wt[i, k] + td[k, j]
  *                     if maxlog < buff[k]:
  *                         maxlog = buff[k]             # <<<<<<<<<<<<<<
@@ -4818,7 +4869,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_6_marginal_loglikelihood(CYTHON_UNUSED 
                 __pyx_t_19 = __pyx_v_k;
                 __pyx_v_maxlog = (*((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_buff.data) + __pyx_t_19)) )));
 
-                /* "bplda/_bplda.pyx":271
+                /* "bplda/_bplda.pyx":274
  *                 for k in range(num_topics):
  *                     buff[k] = wt[i, k] + td[k, j]
  *                     if maxlog < buff[k]:             # <<<<<<<<<<<<<<
@@ -4828,7 +4879,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_6_marginal_loglikelihood(CYTHON_UNUSED 
               }
             }
 
-            /* "bplda/_bplda.pyx":274
+            /* "bplda/_bplda.pyx":277
  *                         maxlog = buff[k]
  * 
  *                 likeli = 0.0             # <<<<<<<<<<<<<<
@@ -4837,7 +4888,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_6_marginal_loglikelihood(CYTHON_UNUSED 
  */
             __pyx_v_likeli = 0.0;
 
-            /* "bplda/_bplda.pyx":275
+            /* "bplda/_bplda.pyx":278
  * 
  *                 likeli = 0.0
  *                 for k in range(num_topics):             # <<<<<<<<<<<<<<
@@ -4849,7 +4900,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_6_marginal_loglikelihood(CYTHON_UNUSED 
             for (__pyx_t_15 = 0; __pyx_t_15 < __pyx_t_14; __pyx_t_15+=1) {
               __pyx_v_k = __pyx_t_15;
 
-              /* "bplda/_bplda.pyx":276
+              /* "bplda/_bplda.pyx":279
  *                 likeli = 0.0
  *                 for k in range(num_topics):
  *                     likeli += exp(buff[k] - maxlog)             # <<<<<<<<<<<<<<
@@ -4860,7 +4911,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_6_marginal_loglikelihood(CYTHON_UNUSED 
               __pyx_v_likeli = (__pyx_v_likeli + exp(((*((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_buff.data) + __pyx_t_19)) ))) - __pyx_v_maxlog)));
             }
 
-            /* "bplda/_bplda.pyx":278
+            /* "bplda/_bplda.pyx":281
  *                     likeli += exp(buff[k] - maxlog)
  * 
  *                 loglikeli += log(likeli) + maxlog             # <<<<<<<<<<<<<<
@@ -4872,7 +4923,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_6_marginal_loglikelihood(CYTHON_UNUSED 
         }
       }
 
-      /* "bplda/_bplda.pyx":264
+      /* "bplda/_bplda.pyx":267
  * 
  *     # compute new mu
  *     with nogil:             # <<<<<<<<<<<<<<
@@ -4891,7 +4942,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_6_marginal_loglikelihood(CYTHON_UNUSED 
       }
   }
 
-  /* "bplda/_bplda.pyx":280
+  /* "bplda/_bplda.pyx":283
  *                 loglikeli += log(likeli) + maxlog
  * 
  *     return loglikeli             # <<<<<<<<<<<<<<
@@ -4899,13 +4950,13 @@ static PyObject *__pyx_pf_5bplda_6_bplda_6_marginal_loglikelihood(CYTHON_UNUSED 
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_5 = PyFloat_FromDouble(__pyx_v_loglikeli); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 280, __pyx_L1_error)
+  __pyx_t_5 = PyFloat_FromDouble(__pyx_v_loglikeli); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 283, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_r = __pyx_t_5;
   __pyx_t_5 = 0;
   goto __pyx_L0;
 
-  /* "bplda/_bplda.pyx":232
+  /* "bplda/_bplda.pyx":235
  * @boundscheck(False)
  * @wraparound(False)
  * def _marginal_loglikelihood(double loglikeli,             # <<<<<<<<<<<<<<
@@ -4932,7 +4983,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_6_marginal_loglikelihood(CYTHON_UNUSED 
   return __pyx_r;
 }
 
-/* "bplda/_bplda.pyx":285
+/* "bplda/_bplda.pyx":288
  * @boundscheck(False)
  * @wraparound(False)
  * def _loglikelihood(double loglikeli,             # <<<<<<<<<<<<<<
@@ -4988,35 +5039,35 @@ static PyObject *__pyx_pw_5bplda_6_bplda_9_loglikelihood(PyObject *__pyx_self, P
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_wt)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("_loglikelihood", 1, 6, 6, 1); __PYX_ERR(0, 285, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("_loglikelihood", 1, 6, 6, 1); __PYX_ERR(0, 288, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_td)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("_loglikelihood", 1, 6, 6, 2); __PYX_ERR(0, 285, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("_loglikelihood", 1, 6, 6, 2); __PYX_ERR(0, 288, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_num_words)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("_loglikelihood", 1, 6, 6, 3); __PYX_ERR(0, 285, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("_loglikelihood", 1, 6, 6, 3); __PYX_ERR(0, 288, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  4:
         if (likely((values[4] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_num_docs)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("_loglikelihood", 1, 6, 6, 4); __PYX_ERR(0, 285, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("_loglikelihood", 1, 6, 6, 4); __PYX_ERR(0, 288, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  5:
         if (likely((values[5] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_num_topics)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("_loglikelihood", 1, 6, 6, 5); __PYX_ERR(0, 285, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("_loglikelihood", 1, 6, 6, 5); __PYX_ERR(0, 288, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "_loglikelihood") < 0)) __PYX_ERR(0, 285, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "_loglikelihood") < 0)) __PYX_ERR(0, 288, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 6) {
       goto __pyx_L5_argtuple_error;
@@ -5028,16 +5079,16 @@ static PyObject *__pyx_pw_5bplda_6_bplda_9_loglikelihood(PyObject *__pyx_self, P
       values[4] = PyTuple_GET_ITEM(__pyx_args, 4);
       values[5] = PyTuple_GET_ITEM(__pyx_args, 5);
     }
-    __pyx_v_loglikeli = __pyx_PyFloat_AsDouble(values[0]); if (unlikely((__pyx_v_loglikeli == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 285, __pyx_L3_error)
-    __pyx_v_wt = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_wt.memview)) __PYX_ERR(0, 286, __pyx_L3_error)
-    __pyx_v_td = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(values[2], PyBUF_WRITABLE); if (unlikely(!__pyx_v_td.memview)) __PYX_ERR(0, 287, __pyx_L3_error)
-    __pyx_v_num_words = __Pyx_PyInt_As_int(values[3]); if (unlikely((__pyx_v_num_words == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 288, __pyx_L3_error)
-    __pyx_v_num_docs = __Pyx_PyInt_As_int(values[4]); if (unlikely((__pyx_v_num_docs == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 289, __pyx_L3_error)
-    __pyx_v_num_topics = __Pyx_PyInt_As_int(values[5]); if (unlikely((__pyx_v_num_topics == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 290, __pyx_L3_error)
+    __pyx_v_loglikeli = __pyx_PyFloat_AsDouble(values[0]); if (unlikely((__pyx_v_loglikeli == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 288, __pyx_L3_error)
+    __pyx_v_wt = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_wt.memview)) __PYX_ERR(0, 289, __pyx_L3_error)
+    __pyx_v_td = __Pyx_PyObject_to_MemoryviewSlice_dsds_double(values[2], PyBUF_WRITABLE); if (unlikely(!__pyx_v_td.memview)) __PYX_ERR(0, 290, __pyx_L3_error)
+    __pyx_v_num_words = __Pyx_PyInt_As_int(values[3]); if (unlikely((__pyx_v_num_words == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 291, __pyx_L3_error)
+    __pyx_v_num_docs = __Pyx_PyInt_As_int(values[4]); if (unlikely((__pyx_v_num_docs == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 292, __pyx_L3_error)
+    __pyx_v_num_topics = __Pyx_PyInt_As_int(values[5]); if (unlikely((__pyx_v_num_topics == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 293, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("_loglikelihood", 1, 6, 6, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 285, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("_loglikelihood", 1, 6, 6, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 288, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("bplda._bplda._loglikelihood", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -5085,46 +5136,46 @@ static PyObject *__pyx_pf_5bplda_6_bplda_8_loglikelihood(CYTHON_UNUSED PyObject 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_loglikelihood", 0);
 
-  /* "bplda/_bplda.pyx":313
+  /* "bplda/_bplda.pyx":316
  * 
  *     cdef int i, j, k
  *     cdef double[::view.contiguous] buff = np.zeros(num_topics, dtype=np.float)             # <<<<<<<<<<<<<<
  *     cdef double  maxlog, likeli
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 313, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 316, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 313, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 316, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_num_topics); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 313, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_num_topics); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 316, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 313, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 316, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 313, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 316, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 313, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 316, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_float); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 313, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_float); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 316, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 313, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_dtype, __pyx_t_5) < 0) __PYX_ERR(0, 316, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 313, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 316, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_double(__pyx_t_5, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 313, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_to_MemoryviewSlice_dc_double(__pyx_t_5, PyBUF_WRITABLE); if (unlikely(!__pyx_t_6.memview)) __PYX_ERR(0, 316, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_buff = __pyx_t_6;
   __pyx_t_6.memview = NULL;
   __pyx_t_6.data = NULL;
 
-  /* "bplda/_bplda.pyx":317
+  /* "bplda/_bplda.pyx":320
  * 
  *     # compute new mu
  *     with nogil:             # <<<<<<<<<<<<<<
@@ -5139,7 +5190,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_8_loglikelihood(CYTHON_UNUSED PyObject 
       #endif
       /*try:*/ {
 
-        /* "bplda/_bplda.pyx":318
+        /* "bplda/_bplda.pyx":321
  *     # compute new mu
  *     with nogil:
  *         for i in range(num_words):             # <<<<<<<<<<<<<<
@@ -5151,7 +5202,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_8_loglikelihood(CYTHON_UNUSED PyObject 
         for (__pyx_t_9 = 0; __pyx_t_9 < __pyx_t_8; __pyx_t_9+=1) {
           __pyx_v_i = __pyx_t_9;
 
-          /* "bplda/_bplda.pyx":319
+          /* "bplda/_bplda.pyx":322
  *     with nogil:
  *         for i in range(num_words):
  *             for j in range(num_docs):             # <<<<<<<<<<<<<<
@@ -5163,7 +5214,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_8_loglikelihood(CYTHON_UNUSED PyObject 
           for (__pyx_t_12 = 0; __pyx_t_12 < __pyx_t_11; __pyx_t_12+=1) {
             __pyx_v_j = __pyx_t_12;
 
-            /* "bplda/_bplda.pyx":321
+            /* "bplda/_bplda.pyx":324
  *             for j in range(num_docs):
  * 
  *                 maxlog = -INFINITY             # <<<<<<<<<<<<<<
@@ -5172,7 +5223,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_8_loglikelihood(CYTHON_UNUSED PyObject 
  */
             __pyx_v_maxlog = (-INFINITY);
 
-            /* "bplda/_bplda.pyx":322
+            /* "bplda/_bplda.pyx":325
  * 
  *                 maxlog = -INFINITY
  *                 for k in range(num_topics):             # <<<<<<<<<<<<<<
@@ -5184,7 +5235,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_8_loglikelihood(CYTHON_UNUSED PyObject 
             for (__pyx_t_15 = 0; __pyx_t_15 < __pyx_t_14; __pyx_t_15+=1) {
               __pyx_v_k = __pyx_t_15;
 
-              /* "bplda/_bplda.pyx":323
+              /* "bplda/_bplda.pyx":326
  *                 maxlog = -INFINITY
  *                 for k in range(num_topics):
  *                     buff[k] = wt[i, k] + td[k, j]             # <<<<<<<<<<<<<<
@@ -5198,7 +5249,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_8_loglikelihood(CYTHON_UNUSED PyObject 
               __pyx_t_20 = __pyx_v_k;
               *((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_buff.data) + __pyx_t_20)) )) = ((*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_wt.data + __pyx_t_16 * __pyx_v_wt.strides[0]) ) + __pyx_t_17 * __pyx_v_wt.strides[1]) ))) + (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_td.data + __pyx_t_18 * __pyx_v_td.strides[0]) ) + __pyx_t_19 * __pyx_v_td.strides[1]) ))));
 
-              /* "bplda/_bplda.pyx":324
+              /* "bplda/_bplda.pyx":327
  *                 for k in range(num_topics):
  *                     buff[k] = wt[i, k] + td[k, j]
  *                     if maxlog < buff[k]:             # <<<<<<<<<<<<<<
@@ -5209,7 +5260,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_8_loglikelihood(CYTHON_UNUSED PyObject 
               __pyx_t_21 = ((__pyx_v_maxlog < (*((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_buff.data) + __pyx_t_19)) )))) != 0);
               if (__pyx_t_21) {
 
-                /* "bplda/_bplda.pyx":325
+                /* "bplda/_bplda.pyx":328
  *                     buff[k] = wt[i, k] + td[k, j]
  *                     if maxlog < buff[k]:
  *                         maxlog = buff[k]             # <<<<<<<<<<<<<<
@@ -5219,7 +5270,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_8_loglikelihood(CYTHON_UNUSED PyObject 
                 __pyx_t_19 = __pyx_v_k;
                 __pyx_v_maxlog = (*((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_buff.data) + __pyx_t_19)) )));
 
-                /* "bplda/_bplda.pyx":324
+                /* "bplda/_bplda.pyx":327
  *                 for k in range(num_topics):
  *                     buff[k] = wt[i, k] + td[k, j]
  *                     if maxlog < buff[k]:             # <<<<<<<<<<<<<<
@@ -5229,7 +5280,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_8_loglikelihood(CYTHON_UNUSED PyObject 
               }
             }
 
-            /* "bplda/_bplda.pyx":327
+            /* "bplda/_bplda.pyx":330
  *                         maxlog = buff[k]
  * 
  *                 likeli = 0.0             # <<<<<<<<<<<<<<
@@ -5238,7 +5289,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_8_loglikelihood(CYTHON_UNUSED PyObject 
  */
             __pyx_v_likeli = 0.0;
 
-            /* "bplda/_bplda.pyx":328
+            /* "bplda/_bplda.pyx":331
  * 
  *                 likeli = 0.0
  *                 for k in range(num_topics):             # <<<<<<<<<<<<<<
@@ -5250,7 +5301,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_8_loglikelihood(CYTHON_UNUSED PyObject 
             for (__pyx_t_15 = 0; __pyx_t_15 < __pyx_t_14; __pyx_t_15+=1) {
               __pyx_v_k = __pyx_t_15;
 
-              /* "bplda/_bplda.pyx":329
+              /* "bplda/_bplda.pyx":332
  *                 likeli = 0.0
  *                 for k in range(num_topics):
  *                     likeli += exp(buff[k] - maxlog)             # <<<<<<<<<<<<<<
@@ -5261,7 +5312,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_8_loglikelihood(CYTHON_UNUSED PyObject 
               __pyx_v_likeli = (__pyx_v_likeli + exp(((*((double *) ( /* dim=0 */ ((char *) (((double *) __pyx_v_buff.data) + __pyx_t_19)) ))) - __pyx_v_maxlog)));
             }
 
-            /* "bplda/_bplda.pyx":331
+            /* "bplda/_bplda.pyx":334
  *                     likeli += exp(buff[k] - maxlog)
  * 
  *                 loglikeli += log(likeli) + maxlog             # <<<<<<<<<<<<<<
@@ -5273,7 +5324,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_8_loglikelihood(CYTHON_UNUSED PyObject 
         }
       }
 
-      /* "bplda/_bplda.pyx":317
+      /* "bplda/_bplda.pyx":320
  * 
  *     # compute new mu
  *     with nogil:             # <<<<<<<<<<<<<<
@@ -5292,7 +5343,7 @@ static PyObject *__pyx_pf_5bplda_6_bplda_8_loglikelihood(CYTHON_UNUSED PyObject 
       }
   }
 
-  /* "bplda/_bplda.pyx":333
+  /* "bplda/_bplda.pyx":336
  *                 loglikeli += log(likeli) + maxlog
  * 
  *     return loglikeli             # <<<<<<<<<<<<<<
@@ -5300,13 +5351,13 @@ static PyObject *__pyx_pf_5bplda_6_bplda_8_loglikelihood(CYTHON_UNUSED PyObject 
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_5 = PyFloat_FromDouble(__pyx_v_loglikeli); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 333, __pyx_L1_error)
+  __pyx_t_5 = PyFloat_FromDouble(__pyx_v_loglikeli); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 336, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_r = __pyx_t_5;
   __pyx_t_5 = 0;
   goto __pyx_L0;
 
-  /* "bplda/_bplda.pyx":285
+  /* "bplda/_bplda.pyx":288
  * @boundscheck(False)
  * @wraparound(False)
  * def _loglikelihood(double loglikeli,             # <<<<<<<<<<<<<<
@@ -20759,6 +20810,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_encode, __pyx_k_encode, sizeof(__pyx_k_encode), 0, 0, 1, 1},
   {&__pyx_n_s_enumerate, __pyx_k_enumerate, sizeof(__pyx_k_enumerate), 0, 0, 1, 1},
   {&__pyx_n_s_error, __pyx_k_error, sizeof(__pyx_k_error), 0, 0, 1, 1},
+  {&__pyx_n_s_fixed_words, __pyx_k_fixed_words, sizeof(__pyx_k_fixed_words), 0, 0, 1, 1},
   {&__pyx_n_s_flags, __pyx_k_flags, sizeof(__pyx_k_flags), 0, 0, 1, 1},
   {&__pyx_n_s_float, __pyx_k_float, sizeof(__pyx_k_float), 0, 0, 1, 1},
   {&__pyx_n_s_format, __pyx_k_format, sizeof(__pyx_k_format), 0, 0, 1, 1},
@@ -21157,34 +21209,34 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *                              int[:] doc,
  *                              double[:] multiple,
  */
-  __pyx_tuple__28 = PyTuple_Pack(26, __pyx_n_s_word, __pyx_n_s_doc, __pyx_n_s_multiple, __pyx_n_s_z_assign, __pyx_n_s_word_topic_matrix, __pyx_n_s_topic_document_matrix, __pyx_n_s_rands, __pyx_n_s_num_words, __pyx_n_s_num_topics, __pyx_n_s_voc_size, __pyx_n_s_alpha, __pyx_n_s_beta, __pyx_n_s_doc_counts, __pyx_n_s_topic_counts, __pyx_n_s_i, __pyx_n_s_w_i, __pyx_n_s_d_i, __pyx_n_s_z_i, __pyx_n_s_k, __pyx_n_s_n_words, __pyx_n_s_test, __pyx_n_s_prob_norm, __pyx_n_s_m_i, __pyx_n_s_r, __pyx_n_s_p, __pyx_n_s_prob_z); if (unlikely(!__pyx_tuple__28)) __PYX_ERR(0, 145, __pyx_L1_error)
+  __pyx_tuple__28 = PyTuple_Pack(27, __pyx_n_s_word, __pyx_n_s_doc, __pyx_n_s_multiple, __pyx_n_s_z_assign, __pyx_n_s_word_topic_matrix, __pyx_n_s_topic_document_matrix, __pyx_n_s_rands, __pyx_n_s_num_words, __pyx_n_s_num_topics, __pyx_n_s_voc_size, __pyx_n_s_alpha, __pyx_n_s_beta, __pyx_n_s_doc_counts, __pyx_n_s_topic_counts, __pyx_n_s_fixed_words, __pyx_n_s_i, __pyx_n_s_w_i, __pyx_n_s_d_i, __pyx_n_s_z_i, __pyx_n_s_k, __pyx_n_s_n_words, __pyx_n_s_test, __pyx_n_s_prob_norm, __pyx_n_s_m_i, __pyx_n_s_r, __pyx_n_s_p, __pyx_n_s_prob_z); if (unlikely(!__pyx_tuple__28)) __PYX_ERR(0, 145, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__28);
   __Pyx_GIVEREF(__pyx_tuple__28);
-  __pyx_codeobj__29 = (PyObject*)__Pyx_PyCode_New(14, 0, 26, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__28, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_bplda__bplda_pyx, __pyx_n_s_collapsed_gibbs_sampling, 145, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__29)) __PYX_ERR(0, 145, __pyx_L1_error)
+  __pyx_codeobj__29 = (PyObject*)__Pyx_PyCode_New(15, 0, 27, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__28, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_bplda__bplda_pyx, __pyx_n_s_collapsed_gibbs_sampling, 145, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__29)) __PYX_ERR(0, 145, __pyx_L1_error)
 
-  /* "bplda/_bplda.pyx":232
+  /* "bplda/_bplda.pyx":235
  * @boundscheck(False)
  * @wraparound(False)
  * def _marginal_loglikelihood(double loglikeli,             # <<<<<<<<<<<<<<
  *               double[:,:] wt,
  *               double[:,:] td,
  */
-  __pyx_tuple__30 = PyTuple_Pack(12, __pyx_n_s_loglikeli, __pyx_n_s_wt, __pyx_n_s_td, __pyx_n_s_num_words, __pyx_n_s_num_docs, __pyx_n_s_num_topics, __pyx_n_s_i, __pyx_n_s_j, __pyx_n_s_k, __pyx_n_s_buff, __pyx_n_s_maxlog, __pyx_n_s_likeli); if (unlikely(!__pyx_tuple__30)) __PYX_ERR(0, 232, __pyx_L1_error)
+  __pyx_tuple__30 = PyTuple_Pack(12, __pyx_n_s_loglikeli, __pyx_n_s_wt, __pyx_n_s_td, __pyx_n_s_num_words, __pyx_n_s_num_docs, __pyx_n_s_num_topics, __pyx_n_s_i, __pyx_n_s_j, __pyx_n_s_k, __pyx_n_s_buff, __pyx_n_s_maxlog, __pyx_n_s_likeli); if (unlikely(!__pyx_tuple__30)) __PYX_ERR(0, 235, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__30);
   __Pyx_GIVEREF(__pyx_tuple__30);
-  __pyx_codeobj__31 = (PyObject*)__Pyx_PyCode_New(6, 0, 12, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__30, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_bplda__bplda_pyx, __pyx_n_s_marginal_loglikelihood, 232, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__31)) __PYX_ERR(0, 232, __pyx_L1_error)
+  __pyx_codeobj__31 = (PyObject*)__Pyx_PyCode_New(6, 0, 12, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__30, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_bplda__bplda_pyx, __pyx_n_s_marginal_loglikelihood, 235, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__31)) __PYX_ERR(0, 235, __pyx_L1_error)
 
-  /* "bplda/_bplda.pyx":285
+  /* "bplda/_bplda.pyx":288
  * @boundscheck(False)
  * @wraparound(False)
  * def _loglikelihood(double loglikeli,             # <<<<<<<<<<<<<<
  *               double[:,:] wt,
  *               double[:,:] td,
  */
-  __pyx_tuple__32 = PyTuple_Pack(12, __pyx_n_s_loglikeli, __pyx_n_s_wt, __pyx_n_s_td, __pyx_n_s_num_words, __pyx_n_s_num_docs, __pyx_n_s_num_topics, __pyx_n_s_i, __pyx_n_s_j, __pyx_n_s_k, __pyx_n_s_buff, __pyx_n_s_maxlog, __pyx_n_s_likeli); if (unlikely(!__pyx_tuple__32)) __PYX_ERR(0, 285, __pyx_L1_error)
+  __pyx_tuple__32 = PyTuple_Pack(12, __pyx_n_s_loglikeli, __pyx_n_s_wt, __pyx_n_s_td, __pyx_n_s_num_words, __pyx_n_s_num_docs, __pyx_n_s_num_topics, __pyx_n_s_i, __pyx_n_s_j, __pyx_n_s_k, __pyx_n_s_buff, __pyx_n_s_maxlog, __pyx_n_s_likeli); if (unlikely(!__pyx_tuple__32)) __PYX_ERR(0, 288, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__32);
   __Pyx_GIVEREF(__pyx_tuple__32);
-  __pyx_codeobj__33 = (PyObject*)__Pyx_PyCode_New(6, 0, 12, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__32, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_bplda__bplda_pyx, __pyx_n_s_loglikelihood, 285, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__33)) __PYX_ERR(0, 285, __pyx_L1_error)
+  __pyx_codeobj__33 = (PyObject*)__Pyx_PyCode_New(6, 0, 12, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__32, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_src_bplda__bplda_pyx, __pyx_n_s_loglikelihood, 288, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__33)) __PYX_ERR(0, 288, __pyx_L1_error)
 
   /* "View.MemoryView":286
  *         return self.name
@@ -21684,28 +21736,28 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_collapsed_gibbs_sampling, __pyx_t_1) < 0) __PYX_ERR(0, 145, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "bplda/_bplda.pyx":232
+  /* "bplda/_bplda.pyx":235
  * @boundscheck(False)
  * @wraparound(False)
  * def _marginal_loglikelihood(double loglikeli,             # <<<<<<<<<<<<<<
  *               double[:,:] wt,
  *               double[:,:] td,
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_5bplda_6_bplda_7_marginal_loglikelihood, NULL, __pyx_n_s_bplda__bplda); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 232, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_5bplda_6_bplda_7_marginal_loglikelihood, NULL, __pyx_n_s_bplda__bplda); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 235, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_marginal_loglikelihood, __pyx_t_1) < 0) __PYX_ERR(0, 232, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_marginal_loglikelihood, __pyx_t_1) < 0) __PYX_ERR(0, 235, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "bplda/_bplda.pyx":285
+  /* "bplda/_bplda.pyx":288
  * @boundscheck(False)
  * @wraparound(False)
  * def _loglikelihood(double loglikeli,             # <<<<<<<<<<<<<<
  *               double[:,:] wt,
  *               double[:,:] td,
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_5bplda_6_bplda_9_loglikelihood, NULL, __pyx_n_s_bplda__bplda); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 285, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_5bplda_6_bplda_9_loglikelihood, NULL, __pyx_n_s_bplda__bplda); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 288, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_loglikelihood, __pyx_t_1) < 0) __PYX_ERR(0, 285, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_loglikelihood, __pyx_t_1) < 0) __PYX_ERR(0, 288, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "bplda/_bplda.pyx":2

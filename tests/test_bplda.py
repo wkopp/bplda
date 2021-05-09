@@ -1,19 +1,19 @@
 import numpy as np
 from scipy.sparse import csr_matrix
-from bplda import LDA
+from bplda import BeliefPropLDA
 
 
 def test_lda2():
 
     # toy data (10 documents, vocabulary size=5)
-    minitest = np.zeros((5, 10))
-    minitest[:3, :5] = 1
-    minitest[-3:, -5:] = 1
+    X = np.zeros((5, 10))
+    X[:3, :5] = 1
+    X[-3:, -5:] = 1
 
-    lda = LDA(3, niter=10, seed=10)
-    lda.fit(minitest)
-    wt = lda.word_topic_
-    dt = lda.doc_topic_
+    lda = BeliefPropLDA(3, niter=10, seed=10)
+    lda.fit(X)
+    wt = lda.word_topic_prob_
+    dt = lda.topic_doc_prob_
 
     print("word-topic statistics (not normalized)")
     wt
@@ -46,21 +46,21 @@ def test_lda2():
         ]
     )
 
-    np.testing.assert_allclose(dt, compdt, atol=1e-6, rtol=1e-6)
+    np.testing.assert_allclose(dt, compdt.T, atol=1e-6, rtol=1e-6)
 
 
 def test_lda3():
 
     # toy data (10 documents, vocabulary size=5)
-    minitest = np.zeros((5, 10))
-    minitest[:3, :5] = 1
-    minitest[-3:, -5:] = 1
+    X = np.zeros((5, 10))
+    X[:3, :5] = 1
+    X[-3:, -5:] = 1
 
-    lda = LDA(3, niter=10, seed=10, verbose=True, debug=True)
-    dt = lda.fit_transform(csr_matrix(minitest))
+    lda = BeliefPropLDA(3, niter=10, seed=10, verbose=True, debug=True)
+    dt = lda.fit_transform(csr_matrix(X))
 
-    lda.fit(csr_matrix(minitest))
-    wt = lda.word_topic_
+    lda.fit(csr_matrix(X))
+    wt = lda.word_topic_prob_
 
     print("word-topic statistics (not normalized)")
     wt
@@ -93,19 +93,19 @@ def test_lda3():
         ]
     )
 
-    np.testing.assert_allclose(dt, compdt, atol=1e-6, rtol=1e-6)
+    np.testing.assert_allclose(dt, compdt.T, atol=1e-6, rtol=1e-6)
 
 
 def test_score():
 
     # toy data (10 documents, vocabulary size=5)
-    minitest = np.zeros((5, 10))
-    minitest[:3, :5] = 1
-    minitest[-3:, -5:] = 1
+    X = np.zeros((5, 10))
+    X[:3, :5] = 1
+    X[-3:, -5:] = 1
 
-    lda = LDA(3, niter=10, seed=10)
-    lda.fit(minitest)
-    wt = lda.word_topic_
-    dt = lda.doc_topic_
+    lda = BeliefPropLDA(3, niter=10, seed=10)
+    lda.fit(X)
+    wt = lda.word_topic_prob_
+    dt = lda.topic_doc_prob_
 
-    print(lda.score(minitest))
+    print(lda.score(X))

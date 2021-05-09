@@ -26,12 +26,12 @@ Getting started
 .. code-block:: python
 
    import numpy as np
-   from bplda import LDA
+   from bplda import BeliefProbLDA
 
    # toy data (10 documents, vocabulary size=5)
-   minitest = np.zeros((5, 10))
-   minitest[:3,:5]=1
-   minitest[-3:,-5:]=1
+   X = np.zeros((5, 10))
+   X[:3,:5]=1
+   X[-3:,-5:]=1
 
    model = LDA(3, niter=10, seed=10)
 

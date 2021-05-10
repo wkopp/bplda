@@ -42,7 +42,7 @@ class BeliefPropLDA(BaseEstimator, TransformerMixin):
     Parameters
     -----------
 
-    n_topics : int
+    num_topics : int
         Number of topics
     alpha : float
         Document-topic prior. Default: 0.1
@@ -69,7 +69,7 @@ class BeliefPropLDA(BaseEstimator, TransformerMixin):
 
     def __init__(
         self,
-        n_topics,
+        num_topics,
         alpha=1e-1,
         beta=1e-1,
         niter=10,
@@ -78,13 +78,13 @@ class BeliefPropLDA(BaseEstimator, TransformerMixin):
         debug=False,
         evaluate_every=100
     ):
-        self.num_topics = self.n_topics = n_topics
-        self.alpha_ = alpha
-        self.beta_ = beta
-        self.niter_ = niter
-        self.seed_ = seed
-        self.verbose_ = verbose
-        self.debug_ = debug
+        self.num_topics = num_topics
+        self.alpha = self.alpha_ = alpha
+        self.beta = self.beta_ = beta
+        self.niter = self.niter_ = niter
+        self.seed = self.seed_ = seed
+        self.verbose= self.verbose_ = verbose
+        self.debug = self.debug_ = debug
         self.evaluate_every = evaluate_every
 
     def _init(self, X):
@@ -269,7 +269,7 @@ class CollapsedGibbsLDA(BaseEstimator, TransformerMixin):
     Parameters
     -----------
 
-    n_topics : int
+    num_topics : int
         Number of topics
     alpha : float
         Document-topic prior. Default: 0.1
@@ -298,7 +298,7 @@ class CollapsedGibbsLDA(BaseEstimator, TransformerMixin):
 
     def __init__(
         self,
-        n_topics,
+        num_topics,
         alpha=1e-1,
         beta=1e-1,
         burnin=100,
@@ -308,14 +308,14 @@ class CollapsedGibbsLDA(BaseEstimator, TransformerMixin):
         debug=False,
         evaluate_every=100
     ):
-        self.num_topics = n_topics
-        self.alpha_ = alpha
-        self.beta_ = beta
-        self.burnin_ = burnin
-        self.niter_ = niter
-        self.seed_ = seed
-        self.verbose_ = verbose
-        self.debug_ = debug
+        self.num_topics = num_topics
+        self.alpha = self.alpha_ = alpha
+        self.beta = self.beta_ = beta
+        self.burnin = self.burnin_ = burnin
+        self.niter = self.niter_ = niter
+        self.seed = self.seed_ = seed
+        self.verbose = self.verbose_ = verbose
+        self.debug = self.debug_ = debug
         self.evaluate_every = evaluate_every
 
     def _check_input(self, X):

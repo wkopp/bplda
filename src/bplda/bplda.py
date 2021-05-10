@@ -89,7 +89,7 @@ class BeliefPropLDA(BaseEstimator, TransformerMixin):
 
     def _init(self, X):
         # init params
-        mu = check_random_state(self.seed_).rand(X.nnz, self.n_topics)
+        mu = check_random_state(self.seed_).rand(X.nnz, self.num_topics)
         mu /= mu.sum(1, keepdims=True)
         self.mu_ = mu
 
@@ -126,8 +126,8 @@ class BeliefPropLDA(BaseEstimator, TransformerMixin):
         n_tot_words = X.nnz
 
         # prepare summary statistics
-        self.word_topic_matrix = np.zeros((X.shape[0], self.n_topics))
-        self.topic_document_matrix = np.zeros((self.n_topics, X.shape[1]))
+        self.word_topic_matrix = np.zeros((X.shape[0], self.num_topics))
+        self.topic_document_matrix = np.zeros((self.num_topics, X.shape[1]))
 
         update_neighs(
             self.mu_,
@@ -136,7 +136,7 @@ class BeliefPropLDA(BaseEstimator, TransformerMixin):
             w,
             d,
             x.reshape(-1).astype("float"),
-            self.n_topics,
+            self.num_topics,
             n_tot_words,
         )
 
@@ -159,7 +159,7 @@ class BeliefPropLDA(BaseEstimator, TransformerMixin):
                 x.reshape(-1).astype("float"),
                 self.alpha_,
                 self.beta_,
-                self.n_topics,
+                self.num_topics,
                 n_tot_words,
             )
 
@@ -194,7 +194,7 @@ class BeliefPropLDA(BaseEstimator, TransformerMixin):
 
         Returns
         -------
-        topic_doc : np.array[n_topics, n_docs]
+        topic_doc : np.array[num_topics, n_docs]
             Topic-document matrix
         """
         return self.fit(X).topic_doc_prob_
@@ -288,11 +288,11 @@ class CollapsedGibbsLDA(BaseEstimator, TransformerMixin):
 
     Attributes
     ----------
-    components_ : np.array[n_docs, n_topics]
+    components_ : np.array[n_docs, num_topics]
         Document topic distribution.
-    topic_doc_prob_ : np.array[n_topics, n_docs]
+    topic_doc_prob_ : np.array[num_topics, n_docs]
         Document topic distribution.
-    word_topic_prob_ : np.array[n_vocabulary, n_topics]
+    word_topic_prob_ : np.array[n_vocabulary, num_topics]
         Word-topic distribution.
     """
 
@@ -367,7 +367,7 @@ class CollapsedGibbsLDA(BaseEstimator, TransformerMixin):
                word_topic_matrix, topic_document_matrix, document_counts, \
                topic_counts
 
-    def debug(self):
+    def run_debug(self):
         if not self.debug_:
             return
         n=self.word_multiples.sum()
@@ -396,7 +396,7 @@ class CollapsedGibbsLDA(BaseEstimator, TransformerMixin):
         self._init(X)
 
         for epoch in tqdm(range(self.burnin_)):
-            self.debug()
+            self.run_debug()
             ret = collapsed_gibbs_sampling(
                 self.observed_words,
                 self.observed_documents,
@@ -418,7 +418,7 @@ class CollapsedGibbsLDA(BaseEstimator, TransformerMixin):
                  self.history.append(self.score(X))
 
         for epoch in tqdm(range(self.niter_)):
-            self.debug()
+            self.run_debug()
             ret = collapsed_gibbs_sampling(
                 self.observed_words,
                 self.observed_documents,
@@ -505,7 +505,7 @@ class CollapsedGibbsLDA(BaseEstimator, TransformerMixin):
 
         rand_state = check_random_state(self.seed_)
         for epoch in range(3):
-            self.debug()
+            self.run_debug()
             ret = collapsed_gibbs_sampling(
                 ow,
                 od,
